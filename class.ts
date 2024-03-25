@@ -39,15 +39,3 @@ class Fight{
 class GameManager{
 
 }
-
-export class Menu{
-    move: string;
-    openAChest: boolean;
-    leave: boolean;
-
-    constructor(move : string, openAChest : boolean, leave : boolean){
-        this.move = move;
-        this.openAChest = openAChest;
-        this.leave = leave;
-    }
-}
