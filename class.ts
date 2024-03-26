@@ -5,12 +5,13 @@ export default class Character{
     speed: number;
     HPMax: number;
     HPCurrent: number;
+    attackPotency: number;
     canBeHurt: boolean;
     canBeCured: boolean;
     canBeResurrected: boolean;
 
 
-    constructor(name : string, physicalAttack : number, physicalDefense : number, speed : number, HPMax : number){
+    constructor(name : string, physicalAttack : number, physicalDefense : number, speed : number, HPMax : number, HPCurrent : number, attackPotency : number, canBeHurt : boolean, canBeCured : boolean, canBeResurrected: boolean){
         this.name = name;
         this.physicalAttack = physicalAttack;
         this.physicalDefense = physicalDefense;
@@ -21,9 +22,6 @@ export default class Character{
         this.canBeHurt = canBeHurt;
         this.canBeCured = canBeCured;
         this.canBeResurrected = canBeResurrected;
-
-
-        // Animal.populationSize++;
     }
 
 
@@ -38,4 +36,10 @@ class Fight{
 
 class GameManager{
 
+}
+
+class Menu{
+    move: string;
+    openAChest: boolean;
+    leave: boolean;
 }
