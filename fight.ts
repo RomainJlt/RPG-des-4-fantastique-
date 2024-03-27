@@ -158,4 +158,4 @@ function _fight() {
 }
 
 
-_fight();
+
