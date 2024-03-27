@@ -1,9 +1,57 @@
-function fight() {
+class _Character{
+    name: string;
+    physicalAttack: number;
+    physicalDefense: number;
+    magicalAttack: number;//
+    magicalDefense: number;//
+    mana: number;  //
+    speed: number;
+    speedPoint: number;//
+    HPMax: number;
+    HPCurrent: number;
+    attackPotency: number;
+    canBeHurt: boolean;
+    canBeCured: boolean;
+    canBeResurrected: boolean;
+
+
+    constructor(name : string, physicalAttack : number, physicalDefense : number, magicalAttack : number, magicalDefense : number, mana : number, speed : number, speedPoint : number, HPMax : number, HPCurrent : number, attackPotency : number, canBeHurt : boolean, canBeCured : boolean, canBeResurrected: boolean){
+        this.name = name;
+        this.physicalAttack = physicalAttack;
+        this.physicalDefense = physicalDefense;
+        this.magicalAttack = magicalAttack;
+        this.magicalDefense = magicalDefense;
+        this.mana = mana;
+        this.speed = speed;
+        this.speedPoint = speedPoint;
+        this.HPMax = HPMax;
+        this.HPCurrent = HPCurrent;
+        this.attackPotency = attackPotency;
+        this.canBeHurt = canBeHurt;
+        this.canBeCured = canBeCured;
+        this.canBeResurrected = canBeResurrected;
+    }
+
+
+
+
+}
+
+/*class 
+}*/
+let protagonist: _Character;
+let antagonist: _Character;
+
+    
+
+
+
+function _fight() {
     console.log("Un ennemi apparaît!!");
     let turn: string = "";
-    let fmenu: string = "";
-    let fobjet: string = "";
-    let whichattack: string = "";
+    let fmenu: string | null= "";
+    let fobjet: string | null = "";
+    let whichattack: string | null= "";
     let touchingattack: number = 0;
     if (antagonist.speed > protagonist.speed) {
         antagonist.speedPoint = antagonist.speedPoint + 1;
@@ -20,6 +68,7 @@ function fight() {
         if (fmenu === "Attaquer") {
             whichattack = prompt("Quelle attaque voulez-vous utiliser?/n Attaque Physique/n Attaque Magique/n Attaque Spéciale");
             if (whichattack === "Attaque Physique") {
+                console.log("Vous attaquez physiquement!");
                 touchingattack = Math.floor((Math.random() * 100) + 1);
                 if (touchingattack < protagonist.attackPotency) {
                     console.log("Vous attaquez l'ennemi!");
@@ -31,6 +80,7 @@ function fight() {
                 }
             }
             if (whichattack === "Attaque Magique") {
+                console.log("Vous attaquez magiquement!");
                 touchingattack = Math.floor((Math.random() * 100) + 1);
                 if (touchingattack < protagonist.attackPotency) {
                     console.log("Vous attaquez l'ennemi!");
@@ -42,6 +92,7 @@ function fight() {
                 }
             }
             if (whichattack === "Attaque Spéciale") {
+                console.log("Vous utilisez une attaque spéciale!")
                 touchingattack = Math.floor((Math.random() * 100) + 1);
                 if (touchingattack < protagonist.attackPotency) {
                     console.log("Vous attaquez l'ennemi!");
@@ -84,12 +135,12 @@ function fight() {
                     protagonist.HPCurrent = protagonist.HPMax;
                 }
             }
-            if (fobjet === Ether) {
+            if (fobjet === "Ether") {
                 protagonist.mana = protagonist.mana + 0.3*(protagonist.mana);
             }
         }
-        if (fmenu === Quitter) {
-            break;
+        if (fmenu === "Quitter") {
+            return;
         }
     }
     if (turn === "antagonistturn") {
@@ -105,3 +156,6 @@ function fight() {
     }
     
 }
+
+
+_fight();
