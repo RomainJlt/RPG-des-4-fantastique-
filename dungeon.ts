@@ -1,5 +1,5 @@
-// // import { Character}  from './class.ts'; 
-// // import { Monster} from `./persoMonster.ts`;
+import { Character}  from './class.ts'; 
+import { Monster} from `./persoMonster.ts`;
 
 
 // structure of a room in the dungeon

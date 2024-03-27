@@ -1,4 +1,5 @@
-import { Observable } from 'rxjs/Observable';
+import { Character}  from './class.ts'; 
+import { Monster} from `./persoMonster.ts`;
 function chooseGroup(): Character[] {
     console.log("Choose a group of three adventurers from the following classes:");
     console.log("1. Guerrier");
