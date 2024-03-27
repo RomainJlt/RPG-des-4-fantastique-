@@ -1,58 +1,3 @@
-class Character{
-    name: string;
-    physicalAttack: number;
-    physicalDefense: number;
-    magicalAttack: number;
-    magicalDefense: number;
-    mana: number;  
-    speed: number;
-    speedPoint: number;
-    HPMax: number;
-    HPCurrent: number;
-    attackPotency: number;
-    canBeHurt: boolean;
-    canBeCured: boolean;
-    canBeResurrected: boolean;
-
-
-    constructor(name : string, physicalAttack : number, physicalDefense : number, magicalAttack : number, magicalDefense : number, mana : number, speed : number, speedPoint : number, HPMax : number, HPCurrent : number, attackPotency : number, canBeHurt : boolean, canBeCured : boolean, canBeResurrected: boolean){
-        this.name = name;
-        this.physicalAttack = physicalAttack;
-        this.physicalDefense = physicalDefense;
-        this.magicalAttack = magicalAttack;
-        this.magicalDefense = magicalDefense;
-        this.mana = mana;
-        this.speed = speed;
-        this.speedPoint = speedPoint;
-        this.HPMax = HPMax;
-        this.HPCurrent = HPCurrent;
-        this.attackPotency = attackPotency;
-        this.canBeHurt = canBeHurt;
-        this.canBeCured = canBeCured;
-        this.canBeResurrected = canBeResurrected;
-    }
-
-
-
-
-}
-
-/*class Fight{
-    protagonist: Character;
-    antagonist: Character;
-
-    constructor(protagonist : Character, antagonist : Character) {
-        this.protagonist = protagonist;
-        this.antagonist = antagonist;
-    }
-}*/
-let protagonist: Character;
-let antagonist: Character;
-
-    
-
-
-
 function fight() {
     console.log("Un ennemi apparaît!!");
     let turn: string = "";
@@ -160,6 +105,3 @@ function fight() {
     }
     
 }
-
-
-
