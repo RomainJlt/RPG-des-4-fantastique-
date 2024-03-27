@@ -2,11 +2,11 @@ class _Character{
     name: string;
     physicalAttack: number;
     physicalDefense: number;
-    magicalAttack: number;
-    magicalDefense: number;
-    mana: number;  
+    magicalAttack: number;//
+    magicalDefense: number;//
+    mana: number;  //
     speed: number;
-    speedPoint: number;
+    speedPoint: number;//
     HPMax: number;
     HPCurrent: number;
     attackPotency: number;
