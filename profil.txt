@@ -1,0 +1,134 @@
+Guerrier
+Le guerrier aura une attaque et une défense élevée, il ne possèdera pas d'attaque spéciale, et une vitesse moyenne.
+
+*att élevée
+*défense élevée
+*vitesse moyenne
+
+*pas d'att spé
+
+------------------------------------------------------------------------------------------------
+
+Mage
+Le Mage aura une attaque physique faible et une défense faible également. Il possèdera une quantité de Mana ainsi qu'une attaque magique qui la consomme, mais ignore la défense ennemie.
+
+*att physique faible
+*défense faible
+
+*possèdera une quantité de Mana
+*attaque magique qui la consomme
+*ignore la défense ennemie
+
+------------------------------------------------------------------------------------------------
+
+Paladin
+Le paladin aura une attaque moins élevée que le guerrier et une défense légèrement plus élevée. Il possèdera une attaque sainte qui ciblera tous les ennemis, leur infligeant 40% des dégats d'une attaque physique ((attaque - défense adverse)*0.4)
+
+*att moins élevée que le guerrier
+*défense plus élevée que le guerrier
+
+*possèdera une attaque sainte qui ciblera tous les ennemis
+*infligeant 40% des dégats d'une attaque physique ((attaque - défense adverse)*0.4)
+
+------------------------------------------------------------------------------------------------
+
+
+
+
+Barbare
+Le barbare aura une défense faible et une attaque plus élevée encore que le guerrier. Il aura une attaque Berserk qui attaque un ennemi au hasard pour 130% des dégats physiques normaux (attaque - défense adverse)*1.3, mais il se blessera de 20% de sa vie en l'effectuant
+
+*défense faible
+*attaque plus élevée que le guerrier
+
+*attaque Berserk qui attaque un ennemi au hasard pour 130% des dégats physiques normaux (attaque - défense adverse)*1.3, mais il se blessera de 20% de sa vie en l'effectuant
+
+
+------------------------------------------------------------------------------------------------
+
+
+Prêtre
+Le prêtre aura une défense faible et une attaque légèrement plus forte que le mage. Il disposera d'une action de soin, permettant de restauter 25% des points de vie d'un allier ou de lui-même.
+
+
+*défense faible
+*attaque légèrement plus forte que le mage
+
+*action de soin (restauter 25% des points de vie d'un allier ou de lui-même)
+
+------------------------------------------------------------------------------------------------
+
+
+Voleur
+Le voleur aura une défense moyenne ainsi qu'une attaque physique moyenne, mais disposera d'une grande vitesse. Il disposera d'une action permettant de voler un objet : (40% de chances de ne rien voler, 30% d'obtenir une potion, 15% d'obtenir un fragment d'étoile, 10% d'obtenir un éther et 5% d'obtenir une demi-étoile)
+
+*défense moyenne
+*attaque physique moyenne
+*grande vitesse
+*une action permettant de voler un objet : (40% de chances de ne rien voler, 30% d'obtenir une potion, 15% d'obtenir un fragment d'étoile, 10% d'obtenir un éther et 5% d'obtenir une demi-étoile)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---------------------------------------------------------------------------------------------------
+
+Monstre
+Les monstres auront des statistiques que vous déterminerez et à chaque tour, agiront selon ces probabilités :
+
+20% de chances d'attaquer l'aventurier aux PV les plus bas (vivant)
+80% de chances d'attaquer un aventurier au hasard parmi tous les aventuriers vivants.
+L'attaque sera une attaque physique simple.
+
+
+
+
+
+
+
+
+
+---------------------------------------------------------------------------------------------------
+
+
+Boss
+Le Boss aura des statistiques hautes. Il disposera d'une attaque de groupe équivalente à celle du Paladin.
+
+Il aura 70% de chances d'attaquer comme un monstre normal et 30% de lancer son attaque de zone.
