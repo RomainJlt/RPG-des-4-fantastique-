@@ -17,3 +17,16 @@ export const Druide =      new Character("Najm L'Anaconda",                    1
 export const Dieu =        new Character("Julien La Divinité",                 1000, 1000, 1000, 1000, 1000, 100, false, false, false);
 
 export const humain : Character[] = [Guerrier, Mage, Paladin, Barbare, Prêtre, Voleur, Bucheron, Scammer, Geek, Druide, Dieu];
+
+
+
+
+// Name, physicalAttack, physicalDefense ,speed, HPMax, HPCurrent, attackPotency, 
+const Zombie =      new Monster("Pierre",   10, 10, 10, 50, 50, 5);
+const Vampire =     new Monster("Florian",  10, 10, 10, 50, 50, 5);
+const LoupGarou =   new Monster("Charly",   10, 10, 10, 50, 50, 5);
+const Dragon =      new Monster("DG",       10, 10, 10, 50, 50, 5);
+
+export const monster : Monster[] = [Zombie, Vampire, LoupGarou, Dragon];
+
+export { Character };
