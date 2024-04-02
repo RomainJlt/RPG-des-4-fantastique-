@@ -24,7 +24,9 @@ export class Character {
      * @param canBeCured 
      * @param canBeResurrected 
      */
-    constructor(name: string, physicalAttack: number, physicalDefense: number, speed: number, HPMax: number, HPCurrent: number, attackPotency: number, canBeHurt: boolean, canBeCured: boolean, canBeResurrected: boolean) {
+    constructor(name: string, physicalAttack: number, physicalDefense: number, speed: number,
+         HPMax: number, HPCurrent: number, attackPotency: number, canBeHurt: boolean,
+         canBeCured: boolean, canBeResurrected: boolean) {
 
         this.name = name;
         this.physicalAttack = physicalAttack;
