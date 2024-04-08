@@ -1,7 +1,51 @@
-import { Character}  from './class.ts'; 
+import { Character } from "./class.ts";
 
-let protagonist: _Character;
-let antagonist: _Character;
+class _Character{
+    name: string;
+    physicalAttack: number;
+    physicalDefense: number;
+    magicalAttack: number;//
+    magicalDefense: number;//
+    mana: number;  //
+    speed: number;
+    speedPoint: number;//
+    HPMax: number;
+    HPCurrent: number;
+    attackPotency: number;
+    canBeHurt: boolean;
+    canBeCured: boolean;
+    canBeResurrected: boolean;
+
+
+    constructor(name : string, physicalAttack : number, physicalDefense : number, magicalAttack : number, magicalDefense : number, mana : number, speed : number, speedPoint : number, HPMax : number, HPCurrent : number, attackPotency : number, canBeHurt : boolean, canBeCured : boolean, canBeResurrected: boolean){
+        this.name = name;
+        this.physicalAttack = physicalAttack;
+        this.physicalDefense = physicalDefense;
+        this.magicalAttack = magicalAttack;
+        this.magicalDefense = magicalDefense;
+        this.mana = mana;
+        this.speed = speed;
+        this.speedPoint = speedPoint;
+        this.HPMax = HPMax;
+        this.HPCurrent = HPCurrent;
+        this.attackPotency = attackPotency;
+        this.canBeHurt = canBeHurt;
+        this.canBeCured = canBeCured;
+        this.canBeResurrected = canBeResurrected;
+    }
+
+
+
+
+}
+
+/*class 
+}*/
+const protagonist = new _Character("Théophile Le Luisant", 70, 40, 50, 100, 100, 80, 0, 200, 200, 100, false, false, false);;
+const antagonist   = new _Character("Axel Le Scammer De Mémés Baveuses",  65, 35, 100, 100, 100, 80, 0, 150, 150, 65, false, false, false);;
+
+    
+
 
     
 function _fight() {
@@ -9,65 +53,116 @@ function _fight() {
     let turn = "";
     let fmenu: string | null = "";
     let fobjet: string | null = "";
-    let whichattack: string | null = "";
-    let touchingattack = 0;
-
-    if (enemies[0].speed > heroes[0].speed) {
-        enemies.forEach(enemy => enemy.speedPoint += 1);
-    } else {
-        heroes.forEach(hero => hero.speedPoint += 1);
-    }
-
-    while (true) {
-        if (enemies[0].speedPoint > heroes[0].speedPoint) {
-            turn = "enemy";
+    let whichattack: string | null= "";
+    let touchingattack: number = 0;
+    while (protagonist.HPCurrent > 0 && antagonist.HPCurrent > 0) {
+        if (antagonist.speed > protagonist.speed) {
+            antagonist.speedPoint = antagonist.speedPoint + 1;
         } else {
-            turn = "hero";
+            protagonist.speedPoint = protagonist.speedPoint + 1;
         }
-
-        if (turn === "hero") {
-            fmenu = prompt("Que voulez-vous faire?\n1. Attaquer\n2. Se Défendre\n3. Utiliser un objet\n4. Quitter");
-            if (fmenu === "1") {
-                whichattack = prompt("Quelle attaque voulez-vous utiliser?\n1. Attaque Physique\n2. Attaque Magique\n3. Attaque Spéciale");
-                if (whichattack === "1") {
-                    // Physical attack
-                    let enemy = enemies[0]; // Choose enemy
-                    heroes[0].physicalAttack(enemy);
-                } else if (whichattack === "2") {
-                    // Magical attack
-                    let enemy = enemies[0]; // Choose enemy
-                    heroes[0].magicalAttack(enemy);
-                } else if (whichattack === "3") {
-                    // Special attack
-                    let enemy = enemies[0]; // Choose enemy
-                    heroes[0].specialAttack(enemy);
+        if (antagonist.speedPoint > protagonist.speedPoint) {
+            turn = "antagonistturn";
+        } else {
+            turn = "protagonistturn";
+        }
+        if (turn === "protagonistturn") {
+            fmenu = prompt("Que voulez vous faire?/n Attaquer/n Se Défendre/n Utiliser un objet/n Quitter");
+            if (fmenu === "Attaquer") {
+                whichattack = prompt("Quelle attaque voulez-vous utiliser?/n Attaque Physique/n Attaque Magique/n Attaque Spéciale");
+                if (whichattack === "Attaque Physique") {
+                    console.log("Vous attaquez physiquement!");
+                    touchingattack = Math.floor((Math.random() * 100) + 1);
+                    if (touchingattack < protagonist.attackPotency) {
+                        console.log("L'attaque touche!");
+                        let damage = protagonist.physicalAttack - antagonist.physicalDefense;
+                        antagonist.HPCurrent -= Math.max(damage, 0);
+                    }
+                    console.log(`L'ennemi a désormais ${antagonist.HPCurrent}`);
+                    turn = "antagonistturn";
                 }
-            } else if (fmenu === "2") {
-                // Defend
-                heroes[0].defend();
-            } else if (fmenu === "3") {
-                // Use an item
-                fobjet = prompt("Que voulez-vous utiliser comme objet?\n1. Potion\n2. Morceau d'étoile\n3. Demi étoile\n4. Ether");
-                heroes[0].useItem(fobjet);
-            } else if (fmenu === "4") {
-                // Quit the fight
-                break;
-            } else {
-                console.log("Choix invalide. Veuillez entrer un numéro valide.");
+                if (whichattack === "Attaque Magique") {
+                    console.log("Vous attaquez magiquement!");
+                    touchingattack = Math.floor((Math.random() * 100) + 1);
+                    if (touchingattack < protagonist.attackPotency) {
+                        console.log("L'attaque touche!");
+                        let damage = protagonist.magicalAttack - antagonist.magicalDefense;
+                        antagonist.HPCurrent -= Math.max(damage, 0);
+                        console.log(`L'ennemi a désormais ${antagonist.HPCurrent}`);
+                        turn = "antagonistturn";
+                    }
+                }
+                if (whichattack === "Attaque Spéciale") {
+                    console.log("Vous utilisez une attaque spéciale!")
+                    touchingattack = Math.floor((Math.random() * 100) + 1);
+                    if (touchingattack < protagonist.attackPotency) {
+                        console.log("L'attaque touche!");
+                        antagonist.HPCurrent = antagonist.HPCurrent - protagonist.physicalAttack + antagonist.physicalDefense;
+                        if (antagonist.physicalDefense > protagonist.physicalAttack) {
+                            antagonist.HPCurrent = antagonist.HPCurrent - 0;
+                        }
+                        console.log(`L'ennemi a désormais ${antagonist.HPCurrent}`);
+                        turn = "antagonistturn";
+                    }
+                }
             }
-        } else {
-            // Enemy's turn
-            let hero = heroes[0]; // Choose hero
-            enemies[0].attack(hero);
+            if (fmenu === "Se Defendre") {
+                console.log("Vous vous défendez!")
+                if (turn === "antagonistturn") {
+                    protagonist.physicalDefense = (protagonist.physicalDefense)*1.75;
+                    protagonist.magicalDefense = (protagonist.magicalDefense)*1.75;
+                }
+            }
+            if (fmenu === "Utiliser un objet") {
+                fobjet = prompt("Que voulez vous utiliser comme objet?/n Potion/n Morceau d'étoile/n Demi étoile/n Ether/n");
+                if (fobjet === "Potion") {
+                    protagonist.HPCurrent = (protagonist.HPCurrent)+ 0.5*(protagonist.HPMax);
+                    if (protagonist.HPCurrent > protagonist.HPMax) {
+                        protagonist.HPCurrent = protagonist.HPMax;
+                    }
+                }
+                if (fobjet === "Morceau d'étoile") {
+                    if (protagonist.HPCurrent === 0) {
+                        protagonist.HPCurrent = protagonist.HPCurrent + 0.2*(protagonist.HPMax);     
+                    }
+                    else {
+                        protagonist.HPCurrent = protagonist.HPCurrent + 0.5*(protagonist.HPMax);
+                    }
+                }
+                if (fobjet === "Demi étoile") {
+                    if (protagonist.HPCurrent === 0) {
+                        protagonist.HPCurrent = protagonist.HPMax;
+                    } 
+                    else {
+                        protagonist.HPCurrent = protagonist.HPMax;
+                    }
+                }
+                if (fobjet === "Ether") {
+                    protagonist.mana = protagonist.mana + 0.3*(protagonist.mana);
+                }
+            }
+            if (fmenu === "Quitter") {
+                return;
+            }
         }
-
-        if (heroes.every(hero => hero.isDead()) || enemies.every(enemy => enemy.isDead())) {
-            break;
+        if (turn === "antagonistturn") {
+            console.log("C'est au tour de l'ennemi!!");
+            console.log("L'ennemi attaque!!");
+            let damage = antagonist.physicalAttack - protagonist.physicalDefense;
+            protagonist.HPCurrent -= Math.max(damage, 0); 
+            console.log(`Vous avez désormais ${protagonist.HPCurrent} point de vie!`)
+            turn = "protagonistturn";
         }
-        turn = "protagonistturn";
     }
-    
+    if (antagonist.HPCurrent <= 0) {
+        console.log("L'ennemi est vaincu, vous avez gagné!");
+    } 
+    if (protagonist.HPCurrent <= 0) {
+        console.log("Vous êtes vaincu. La partie est terminée");
+    }
 }
 
+_fight;
 
-_fight();
+
+export { _fight };
