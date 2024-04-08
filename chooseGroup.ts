@@ -1,37 +1,29 @@
-// import { Guerrier, Mage, Paladin, Barbare, Prêtre, Voleur, Bucheron, Scammer, Geek, Druide, Dieu } from "./persoMonster.ts";
-// import { Character  } from "./class.ts";
-export function chooseGroup(): Character[] {
-    console.log("Choose a group of three adventurers from the following classes:");
-    console.log("1.  Guerrier");
-    console.log("2.  Mage");
-    console.log("3.  Paladin");
-    console.log("4.  Barbare");
-    console.log("5.  Prêtre");
-    console.log("6.  Voleur");
-    console.log("7.  Bucheron");
-    console.log("8.  Scammer");
-    console.log("9.  Geek");
-    console.log("10. Druide");
-    console.log("11. Dieu");
+import { _fight } from "./fight.ts";
+import { Character, humain } from "./persoMonster.ts";
 
+function chooseGroup(): Character[] {
     const group: Character[] = [];
-    const availableClasses = [Guerrier, Mage, Paladin, Barbare, Prêtre, Voleur, Bucheron, Scammer, Geek, Druide, Dieu];
+
+    console.log("Voici les classes disponibles:");
+    for (const character of humain) {
+        console.log(character.name);
+    }
 
     for (let i = 0; i < 3; i++) {
-        const choice = parseInt(readline.question(`Choose adventurer ${i + 1} class: `));
-
-        if (isNaN(choice) || choice < 1 || choice > 11) {
-            console.log("Invalid choice. Please enter a number between 1 and 11.");
+        const choice = prompt(`Choisissez un personnage ${i + 1}: `);
+        const selectedCharacter = humain.find(character => character.name === choice);
+        
+        if (!selectedCharacter) {
+            console.log("Personnage non trouvé. Veuillez choisir parmi les personnages disponibles.");
             i--;
             continue;
         }
 
-        const selectedClass = availableClasses[choice - 1];
-        const name = readline.question(`Name of adventurer ${i + 1}: `);
-        group.push(new selectedClass(name));
+        group.push(selectedCharacter);
     }
 
     return group;
 }
 
 const adventurers: Character[] = chooseGroup();
+_fight();
