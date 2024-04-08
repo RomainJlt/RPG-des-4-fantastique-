@@ -86,3 +86,4 @@ class Menu{
     openAChest: boolean;
     leave: boolean;
 }
+

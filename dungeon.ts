@@ -4,8 +4,8 @@ import { Monster} from `./persoMonster.ts`;
 
 // structure of a room in the dungeon
 interface Room {
-  type: 'Combat' | 'Chest'; // Type of room: Combat or Chest
-  opponents?: Monster[]; // Array of monsters present in the room (optional)
+  type: 'Combat' | 'Chest'; 
+  opponents?: Monster[]; 
 }
 
 // representation rooms with monsters or chest. 
