@@ -1,10 +1,6 @@
-import { Character, monster } from "././persoMonster.ts";
-
-// Importez les classes de personnages depuis persoMonster.ts
-import { Guerrier, Mage, Paladin, Barbare, Prêtre, Voleur, Bucheron, Scammer, Geek, Druide, Dieu } from "./persoMonster.ts";
-
-
-function chooseGroup(): Character[] {
+// import { Guerrier, Mage, Paladin, Barbare, Prêtre, Voleur, Bucheron, Scammer, Geek, Druide, Dieu } from "./persoMonster.ts";
+// import { Character  } from "./class.ts";
+export function chooseGroup(): Character[] {
     console.log("Choose a group of three adventurers from the following classes:");
     console.log("1.  Guerrier");
     console.log("2.  Mage");
@@ -15,24 +11,23 @@ function chooseGroup(): Character[] {
     console.log("7.  Bucheron");
     console.log("8.  Scammer");
     console.log("9.  Geek");
-    console.log("10. Dieu");
-
-
+    console.log("10. Druide");
+    console.log("11. Dieu");
 
     const group: Character[] = [];
     const availableClasses = [Guerrier, Mage, Paladin, Barbare, Prêtre, Voleur, Bucheron, Scammer, Geek, Druide, Dieu];
 
     for (let i = 0; i < 3; i++) {
-        const choice = parseInt(prompt(`Choose adventurer ${i + 1} class: `));
+        const choice = parseInt(readline.question(`Choose adventurer ${i + 1} class: `));
 
-        if (isNaN(choice) || choice < 1 || choice > 6) {
-            console.log("Invalid choice. Please enter a number between 1 and 6.");
+        if (isNaN(choice) || choice < 1 || choice > 11) {
+            console.log("Invalid choice. Please enter a number between 1 and 11.");
             i--;
             continue;
         }
 
-        const selectedClass = availableClasses[choice + 1];
-        const name = prompt(`Name of adventurer ${i + 1}: `);
+        const selectedClass = availableClasses[choice - 1];
+        const name = readline.question(`Name of adventurer ${i + 1}: `);
         group.push(new selectedClass(name));
     }
 
@@ -40,4 +35,3 @@ function chooseGroup(): Character[] {
 }
 
 const adventurers: Character[] = chooseGroup();
-// console.log(`adventurers`);

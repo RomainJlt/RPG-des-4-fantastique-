@@ -116,30 +116,47 @@ function _fight() {
             if (fmenu === "Utiliser un objet") {
                 fobjet = prompt("Que voulez vous utiliser comme objet?/n Potion/n Morceau d'étoile/n Demi étoile/n Ether/n");
                 if (fobjet === "Potion") {
-                    protagonist.HPCurrent = (protagonist.HPCurrent)+ 0.5*(protagonist.HPMax);
+                    protagonist.HPCurrent += 0.5 * protagonist.HPMax;
                     if (protagonist.HPCurrent > protagonist.HPMax) {
                         protagonist.HPCurrent = protagonist.HPMax;
                     }
+                    console.log(`Vous avez utilisé une potion et vos points de vie sont maintenant ${protagonist.HPCurrent}`);
                 }
+
                 if (fobjet === "Morceau d'étoile") {
-                    if (protagonist.HPCurrent === 0) {
-                        protagonist.HPCurrent = protagonist.HPCurrent + 0.2*(protagonist.HPMax);     
-                    }
-                    else {
-                        protagonist.HPCurrent = protagonist.HPCurrent + 0.5*(protagonist.HPMax);
+                    if (inventory.morceauEtoile > 0) {
+                        if (protagonist.HPCurrent === 0) {
+                            protagonist.HPCurrent = protagonist.HPCurrent + 0.2 * protagonist.HPMax;     
+                        } else {
+                            protagonist.HPCurrent = protagonist.HPCurrent + 0.5 * protagonist.HPMax;
+                        }
+                        inventory.morceauEtoile--;
+                        console.log(`${protagonist.name} a utilisé un morceau d'étoile et a récupéré des points de vie.`);
+                    } else {
+                        console.log("Plus de morceaux d'étoile disponibles !");
                     }
                 }
+
                 if (fobjet === "Demi étoile") {
-                    if (protagonist.HPCurrent === 0) {
+                    if (inventory.demiEtoile > 0) {
                         protagonist.HPCurrent = protagonist.HPMax;
-                    } 
-                    else {
-                        protagonist.HPCurrent = protagonist.HPMax;
+                        inventory.demiEtoile--;
+                        console.log(`${protagonist.name} a utilisé une demi-étoile et a été ressuscité avec 100% de ses points de vie.`);
+                    } else {
+                        console.log("Plus de demi-étoiles disponibles !");
                     }
                 }
+
                 if (fobjet === "Ether") {
-                    protagonist.mana = protagonist.mana + 0.3*(protagonist.mana);
+                    if (inventory.ether > 0) {
+                        protagonist.mana = protagonist.mana + 0.3 * protagonist.mana;
+                        inventory.ether--;
+                        console.log(`${protagonist.name} a utilisé un éther et a récupéré 30% de ses points de mana.`);
+                    } else {
+                        console.log("Plus d'éthers disponibles !");
+                    }
                 }
+
             }
             if (fmenu === "Quitter") {
                 return;
