@@ -1,4 +1,6 @@
 import { Character  } from "./class.ts";
+import { Monster } from "./monster.ts";
+;
 class Dungeon {
   rooms: Room[];
 
