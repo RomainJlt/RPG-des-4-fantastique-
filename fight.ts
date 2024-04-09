@@ -49,7 +49,6 @@ const antagonist   = new _Character("Axel Le Scammer De Mémés Baveuses",  65, 
 
 
 function _fight() {
-    console.log("Un ennemi apparaît!!");
     let turn: string = "";
     let fmenu: string | null= "";
     let fobjet: string | null = "";

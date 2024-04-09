@@ -25,8 +25,14 @@ export const humain : Character[] = [guerrier,mage,paladin,barbare,prêtre,voleu
 const zombie = new Monster("Pierre",    10, 10, 10, 50, 50, 5);
 const vampire = new Monster("Florian",  10, 10, 10, 50, 50, 5);
 const loupGarou = new Monster("Charly", 10, 10, 10, 50, 50, 5);
-const dragon = new Monster("DG", 10, 10, 10, 50, 50, 5);
+// const dragon = new Monster("DG", 10, 10, 10, 50, 50, 5);
 
-export const monster : Monster[] = [zombie, vampire, loupGarou,dragon];
+export const dragon: Monster[] = [
+    new Monster("Dragon", 10, 10, 10, 50, 50, 5),
+    new Monster("Dragon", 10, 10, 10, 50, 50, 5),
+];
+
+export const monsters: Monster[] = [zombie, vampire, loupGarou];
+// export { dragon };
 
 export {Character};
