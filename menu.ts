@@ -60,3 +60,5 @@ class Menu {
     // Affichage de l'option choisie par l'utilisateur
     console.log(`\x1b[32mYou chose:\x1b[0m ${menu.options[userChoice - 1]}`);
 })();
+
+export { Menu };
