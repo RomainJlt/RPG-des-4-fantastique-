@@ -1,6 +1,5 @@
 import { Character, Monster } from "./class.ts";
 
-
 // Name, physicalAttack, physicalDefense ,speed, HPMax, HPCurrent, attackPotency, canBeHurt, canBeCured, canBeResurrected 
 const guerrier =    new Character("Théophile Le Luisant",               40, 70, 0, 0, 50, 100, 100, 80, false, false, false);
 const mage =        new Character("Merlin Gros Baton",                  10, 10, 50, 30, 50, 100, 100, 80, false, false, false);

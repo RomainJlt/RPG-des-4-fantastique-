@@ -1,5 +1,7 @@
 import { Guerrier, Mage, Paladin, Barbare, Prêtre, Voleur} from "./persoMonster.ts";
 import { Character } from "./class.ts";
+import { inventaire } from "./inventaire.ts";
+import { Character, humain } from "./persoMonster.ts";
 
 function chooseGroup(): Character[] {
     console.log("Choose a group of three adventurers from the following classes:");

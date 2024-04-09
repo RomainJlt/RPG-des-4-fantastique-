@@ -1,3 +1,4 @@
+
 class Menu {
     question: string;
     options: string[];
