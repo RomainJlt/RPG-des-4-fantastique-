@@ -1,7 +1,7 @@
-import { _fight } from "./fight.ts"
-import { Monster } from "./class.ts"
-import { Character, humain } from "./persoMonster.ts"
-import { Menu } from "./menu.ts"
+import { _fight } from "./fight.ts";
+import { Monster } from "./class.ts";
+import { monster, dragon } from "./persoMonster.ts";
+import { Menu } from "./menu.ts";
 
 export class Dungeon {
     private randomMonsters: Monster[];
@@ -24,23 +24,26 @@ export class Dungeon {
     private async exploreRoomWithCombat(numberOfMonsters: number): Promise<void> {
         console.log("Vous entrez dans une salle...");
         console.warn("Des monstres apparaissent: Début du combat...");
-        const chosenMonsters = this.chooseRandomMonster(numberOfMonsters);
+        const chosenMonsters = this.chooseRandomMonsters(numberOfMonsters);
         for(const monster of chosenMonsters){
             console.log(`Un ${monster.name} apparaît !`);
         }
         await _fight();
     }
-    private chooseRandomMonster(numberOfMonsters: number): Monster[] {
+
+    public chooseRandomMonsters(numberOfMonsters: number): Monster[] {
         const chosenMonsters: Monster[] = [];
         for(let i = 0; i < numberOfMonsters; i++){
-            chosenMonsters.push(this.randomMonsters());
+            const randomIndex = Math.floor(Math.random() * this.randomMonsters.length);
+            chosenMonsters.push(this.randomMonsters[randomIndex]);
         }
         return chosenMonsters;
     }
+
     private openChest(): void {
-        private async openChest(): Promise<void> {
-            const chestMenu = new Menu("Vous trouvez un coffre! Que voulez-vous faire?", ["Ouvrir le coffre", "Laisser le coffre"]);
-            const choice = await chestMenu.askUser();
+        const chestMenu = new Menu("Vous trouvez un coffre! Que voulez-vous faire?", ["Ouvrir le coffre", "Laisser le coffre"]);
+        const choicePromise = chestMenu.askUser();
+        choicePromise.then((choice) => {
             if(choice === 1){
                 const trapProbability = Math.random();
                 if(trapProbability < 0.3){
@@ -53,22 +56,15 @@ export class Dungeon {
             } else {
                 console.log("Vous décidez de ne pas ouvrir le coffre!"); 
             }
-        }
+        });
     }
-    console.log("Vous entrez dans la salle du Boss...");
-    if (this.boss) {
-        console.warn(`Un ${this.boss.name} apparaît!`);
+
+    private fightBoss(): void {
+        console.log("Vous entrez dans la salle du Boss...");
+        console.warn(`Un ${this.boss[0].name} apparaît!`);
+        _fight();
     }
-    _fight();
 }
 
-// // const randomMonsters = Monster[] = [
-
-// // ];
-
-// import  { monster} from "./persoMonster";
-
-
-// const randomMonsters: Monster[] = []; // Declare the randomMonsters variable
-// const dungeon = new Dungeon(randomMonsters, dragon);
-// dungeon.explore();
+export const dungeon = new Dungeon(monster, dragon);
+dungeon.explore();
