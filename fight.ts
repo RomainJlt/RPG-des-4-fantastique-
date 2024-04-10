@@ -1,4 +1,6 @@
 import { Character } from "./class.ts";
+import {  Monster } from "./class.ts";
+import { adventurers } from "./chooseGroup.ts";
 
 class _Character{
     name: string;
@@ -49,6 +51,7 @@ const antagonist   = new _Character("Axel Le Scammer De Mémés Baveuses",  65, 
 
 
 function _fight() {
+    // return adventurers;
     console.log("Un ennemi apparaît!!");
     let turn: string = "";
     let fmenu: string | null= "";
@@ -67,7 +70,7 @@ function _fight() {
             turn = "protagonistturn";
         }
         if (turn === "protagonistturn") {
-            fmenu = prompt("Que voulez vous faire?/n Attaquer/n Se Défendre/n Utiliser un objet/n Quitter");
+            fmenu = prompt("Que voulez vous faire?/n Attaquer/n Se Défendre/n  Utiliser un objet/n Quitter");
             if (fmenu === "Attaquer") {
                 whichattack = prompt("Quelle attaque voulez-vous utiliser?/n Attaque Physique/n Attaque Magique/n Attaque Spéciale");
                 if (whichattack === "Attaque Physique") {
@@ -77,19 +80,31 @@ function _fight() {
                         console.log("L'attaque touche!");
                         let damage = protagonist.physicalAttack - antagonist.physicalDefense;
                         antagonist.HPCurrent -= Math.max(damage, 0);
-                    }
+                    }else{
+                        console.log("L'attaque à échoué!");
+                    } 
                     console.log(`L'ennemi a désormais ${antagonist.HPCurrent}`);
                     turn = "antagonistturn";
+
                 }
                 if (whichattack === "Attaque Magique") {
                     console.log("Vous attaquez magiquement!");
                     touchingattack = Math.floor((Math.random() * 100) + 1);
                     if (touchingattack < protagonist.attackPotency) {
                         console.log("L'attaque touche!");
-                        let damage = protagonist.magicalAttack - antagonist.magicalDefense;
-                        antagonist.HPCurrent -= Math.max(damage, 0);
-                        console.log(`L'ennemi a désormais ${antagonist.HPCurrent}`);
-                        turn = "antagonistturn";
+                        if (protagonist.mana > 25) {
+                            let damage = protagonist.magicalAttack;
+                            let useMana = 10;
+                            antagonist.mana -= Math.max(useMana, 0);
+                            antagonist.HPCurrent -= Math.max(damage, 0);
+                            console.log(`Il vous reste ${protagonist.mana - useMana}`);
+                            console.log(`L'ennemi a désormais ${antagonist.HPCurrent}`);
+                            turn = "antagonistturn";
+                        } else {
+                            console.log("Vous n'avez pas assez de mana!");
+                        }
+                    }else{
+                        console.log("L'attaque à échoué!");
                     }
                 }
                 if (whichattack === "Attaque Spéciale") {
@@ -103,7 +118,9 @@ function _fight() {
                         }
                         console.log(`L'ennemi a désormais ${antagonist.HPCurrent}`);
                         turn = "antagonistturn";
-                    }
+                    }else{
+                        console.log("L'attaque à échoué!");
+                    } 
                 }
             }
             if (fmenu === "Se Defendre") {
