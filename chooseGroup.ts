@@ -1,7 +1,7 @@
-import { _fight } from "./fight.ts";
-import { Character, humain } from "./persoMonster.ts";
+import { Character } from "./class.ts";
+import { humain } from "./persoMonster.ts";
 
-function chooseGroup(): Character[] {
+export function chooseGroup(): Character[] {
     const group: Character[] = [];
 
     console.log("Voici les classes disponibles:");

@@ -1,45 +1,56 @@
 import { Character  } from "./class.ts";
-import { Monster } from "./monster.ts";
-;
-class Dungeon {
-  rooms: Room[];
+import { Monster } from "./persoMonster.ts";
 
-  constructor(rooms: Room[]) {
-    this.rooms = rooms;
+export class Donjon {
+  private salles: string[];
+  private aventuriers: string[];
+
+  constructor() {
+      this.salles = ["combat", "coffre", "combat", "coffre", "boss"];
+      this.aventuriers = [];
   }
 
-  explore(heroes: Character[]): void {
-    for (const room of this.rooms) {
-      if (room.type === 'Combat') {
-        console.log('A combat room. You have to fight: ', room.opponents?.map((monster: Monster) => monster.name).join(', '));
-        
-        // Combat logic
-        room.opponents?.forEach(monster => {
-          heroes.forEach(hero => {
-            monster.health -= hero.attackPower;
-            console.log(`${hero.name} attacks ${monster.name}. ${monster.name}'s health is now ${monster.health}`);
-          });
-        });
-      } else if (room.type === 'Chest') {
-        console.log('A chest room.');
-        
-        // Item collection logic
-        console.log('You found a chest. You open it and find a health potion.');
-        heroes.forEach(hero => {
-          hero.health += 50;
-          console.log(`${hero.name}'s health is now ${hero.health}`);
-        });
-      }
+  ajouterAventurier(aventurier: string): void {
+      this.aventuriers.push(aventurier);
+  }
 
-      const allHeroesDefeated = heroes.every(hero => hero.health <= 0);
-      if (allHeroesDefeated) {
-        console.log('All heroes are defeated. Game over.');
-        break;
+  parcourirDonjon(): void {
+      for (let i = 0; i < this.salles.length; i++) {
+          console.log(`\nSalle ${i + 1}`);
+          const salle = this.salles[i];
+          if (salle === "combat") {
+              this.combat();
+          } else if (salle === "coffre") {
+              this.coffre();
+          } else if (salle === "boss") {
+              this.boss();
+          }
       }
-    }
+  }
+
+  private combat(): void {
+      const monstres = ["🦹‍♀️", "🧟", "🧜‍♂️"];
+      console.log("Combat avec:");
+      for (let i = 0; i < 3; i++) {
+          console.log(monstres[Math.floor(Math.random() * monstres.length)]);
+      }
+  }
+
+  private coffre(): void {
+      const objets = ["épée", "potion de soin", "piège"];
+      console.log("Vous ouvrez le coffre et trouvez:");
+      for (let i = 0; i < 2; i++) {
+          console.log(objets[Math.floor(Math.random() * objets.length)]);
+      }
+  }
+
+  private boss(): void {
+      console.log("Vous entrez dans la salle du Boss 🧛");
+      // Combat contre le boss - ici vous pouvez implémenter le combat contre le boss
   }
 }
 
-const dungeon = new Dungeon(dungeonRooms);
-dungeon.explore([]);
-export { Dungeon };
+// Exemple d'utilisation
+const donjon = new Donjon();
+donjon.ajouterAventurier("Héros");
+donjon.parcourirDonjon();

@@ -1,4 +1,24 @@
 export class Character {
+    estKO() {
+        throw new Error("Method not implemented.");
+    }
+    vitesse: any;
+    subirDegats(arg0: number) {
+        throw new Error("Method not implemented.");
+    }
+    defensePhysique(defensePhysique: any) {
+        throw new Error("Method not implemented.");
+    }
+    attaquePhysique() {
+        throw new Error("Method not implemented.");
+    }
+    nom: any;
+    ressusciter: any;
+  health: number;
+  attackPower: any;
+    restaurerVie(arg0: number) {
+        throw new Error('Method not implemented.');
+    }
 
     name: string;
     physicalAttack: number;

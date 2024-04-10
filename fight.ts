@@ -1,65 +1,81 @@
 import { Character } from "./class.ts";
+import Inventaire from "./inventaire.ts";
 
-const protagonist = new Character("Théophile Le Luisant", 70, 100, 50, 100, 100, 80, 0, 200, 200, 100, false, false, false);
-const antagonist = new Character("Axel Le Scammer De Mémés Baveuses", 65, 100, 100, 100, 100, 80, 0, 150, 150, 65, false, false, false);
+const inventaire = new Inventaire();
 
-function _fight(): void {
+function combat(protagoniste: Character, antagoniste: Character): void {
     console.log("Un ennemi apparaît!!");
-    let turn = "";
-    let fmenu: string | null = "";
-    let fobjet: string | null = "";
-    let whichattack: string | null = "";
-    let touchingattack: number = 0;
 
-    while (protagonist.currentHP > 0 && antagonist.currentHP > 0) {
-        if (antagonist.speed > protagonist.speed) {
-            antagonist.speedPoint = antagonist.speedPoint + 1;
-        } else {
-            protagonist.speedPoint = protagonist.speedPoint + 1;
-        }
-        if (antagonist.speedPoint > protagonist.speedPoint) {
-            turn = "antagonistturn";
-        } else {
-            turn = "protagonistturn";
-        }
-        if (turn === "protagonistturn") {
-            fmenu = prompt("Que voulez vous faire?\n Attaquer\n Se Défendre\n Utiliser un objet\n Quitter");
-            if (fmenu === "Attaquer") {
-                whichattack = prompt("Quelle attaque voulez-vous utiliser?\n Attaque Physique\n Attaque Magique\n Attaque Spéciale");
-                // Traitez les différentes attaques comme précédemment
+    // Détermine l'ordre de jeu en fonction de la vitesse des personnages
+    let participants: Character[] = [protagoniste, antagoniste];
+    participants.sort((a, b) => b.vitesse - a.vitesse);
+
+    while (true) {
+        for (const personnage of participants) {
+            if (personnage.HPCurrent <= 0) {
+                console.log(`${personnage.nom} est K.O., il ne peut pas jouer.`);
+                continue; // Saute le tour si le personnage est K.O.
             }
-            if (fmenu === "Se Défendre") {
-                console.log("Vous vous défendez!");
-                // Augmentez la défense du protagoniste
-                protagonist.physicalDefense *= 1.75;
-                protagonist.magicalDefense *= 1.75;
-                // Passez au tour suivant
-                turn = "antagonistturn";
+
+            console.log(`C'est au tour de ${personnage.nom}!!`);
+
+            // Affichage du menu
+            console.log("Que voulez-vous faire?");
+            console.log("1. Attaquer");
+            console.log("2. Capacité spéciale");
+            console.log("3. Utiliser un objet");
+            console.log("4. Quitter");
+
+            // Demande à l'utilisateur de choisir une action
+            const choix = parseInt(prompt("Choisissez une action:") ?? "");
+
+            switch (choix) {
+                case 1: // Attaquer
+                    console.log(`${personnage.nom} attaque physiquement!`);
+                    const degatsPhysiques = Math.max(Number(personnage.attaquePhysique()) - Number(antagoniste.defensePhysique), 0);
+                    antagoniste.subirDegats(degatsPhysiques);
+                    break;
+                case 2: // Capacité spéciale
+                    // À implémenter en fonction des capacités spéciales de chaque personnage
+                    break;
+                case 3: // Utiliser un objet
+                    console.log("Objets disponibles:");
+                    console.log("1. Potion");
+                    console.log("2. Morceau d'étoile");
+                    console.log("3. Demi-étoile");
+                    console.log("4. Ether");
+                    const objet = parseInt(prompt("Choisissez un objet à utiliser:") ?? "");
+                    switch (objet) {
+                        case 1: // Potion
+                            inventaire.utiliserPotion(personnage);
+                            break;
+                        case 2: // Morceau d'étoile
+                            inventaire.utiliserMorceauEtoile(personnage);
+                            break;
+                        case 3: // Demi-étoile
+                            // À implémenter
+                            break;
+                        case 4: // Ether
+                            inventaire.utiliserEther(personnage);
+                            break;
+                        default:
+                            console.log("Choix invalide");
+                    }
+                    break;
+                case 4: // Quitter
+                    console.log(`${personnage.nom} a quitté le combat.`);
+                    return;
+                default:
+                    console.log("Choix invalide");
             }
-            // Ajoutez ici le code pour Utiliser un objet
-            if (fmenu === "Quitter") {
+
+            // Vérifie si l'antagoniste est K.O.
+            if (antagoniste.HPCurrent <= 0) {
+                console.log(`${antagoniste.nom} est vaincu, vous avez gagné!`);
                 return;
             }
         }
-        if (turn === "antagonistturn") {
-            console.log("C'est au tour de l'ennemi!!");
-            console.log("L'ennemi attaque!!");
-            // Effectuez l'attaque de l'ennemi
-            let damage = antagonist.physicalAttack - protagonist.physicalDefense;
-            protagonist.currentHP -= Math.max(damage, 0);
-            console.log(`Vous avez désormais ${protagonist.currentHP} points de vie!`);
-            // Passez au tour du protagoniste
-            turn = "protagonistturn";
-        }
-    }
-    if (antagonist.currentHP <= 0) {
-        console.log("L'ennemi est vaincu, vous avez gagné!");
-    }
-    if (protagonist.currentHP <= 0) {
-        console.log("Vous êtes vaincu. La partie est terminée");
     }
 }
 
-_fight();
-
-export { _fight };
+export { combat };
