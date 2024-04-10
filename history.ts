@@ -2,6 +2,8 @@ import { _fight } from "./fight.ts";
 import { Monster } from "./class.ts";
 import { monsters, dragon } from "./persoMonster.ts";
 import { Menu } from "./menu.ts";
+import { _Character } from "./fight.ts";
+
 
 class Dungeon {
     private randomMonsters: Monster[];
@@ -40,21 +42,26 @@ class Dungeon {
         return chosenMonsters;
     }
 
-    private openChest(): void {
+    private openChest(protagonist: _Character): void {
         const chestMenu = new Menu("Vous trouvez un coffre! Que voulez-vous faire?", ["Ouvrir le coffre", "Laisser le coffre"]);
         const choicePromise = chestMenu.askUser();
-        choicePromise.then((choice) => {
-            if(choice === 1){
+        choicePromise.then((choice: number) => {
+            if (choice === 1) {
                 const trapProbability = Math.random();
-                if(trapProbability < 0.3){
+                if (trapProbability < 0.3) {
                     console.log("Le coffre était piégé. Vous êtes blessé!");
                     //Dégats du trap sur le personnage
                 } else {
-                    console.log("Vous trouvez les récompenses dans le coffre!"); //récompense random
-                    //Donner la récompense
+                    console.log("Vous trouvez les récompenses dans le coffre!");
+                    //Récompense random
+                    const rewards = ["Potion", "Morceau d'étoile", "Demi étoile", "Ether"];
+                    const randomReward = rewards[Math.floor(Math.random() * rewards.length)];
+                    console.log(`Vous trouvez ${randomReward} dans le coffre!`);
+                    //Ajouter la récompense au tableau de string inventaire
+                    protagonist.inventory.push(randomReward);
                 }
             } else {
-                console.log("Vous décidez de ne pas ouvrir le coffre!"); 
+                console.log("Vous décidez de ne pas ouvrir le coffre!");
             }
         });
     }

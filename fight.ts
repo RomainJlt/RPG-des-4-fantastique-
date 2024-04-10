@@ -15,6 +15,7 @@ class _Character{
     canBeHurt: boolean;
     canBeCured: boolean;
     canBeResurrected: boolean;
+    inventory: string[];
 
 
     constructor(name : string, physicalAttack : number, physicalDefense : number, magicalAttack : number, magicalDefense : number, mana : number, speed : number, speedPoint : number, HPMax : number, HPCurrent : number, attackPotency : number, canBeHurt : boolean, canBeCured : boolean, canBeResurrected: boolean){
@@ -32,6 +33,7 @@ class _Character{
         this.canBeHurt = canBeHurt;
         this.canBeCured = canBeCured;
         this.canBeResurrected = canBeResurrected;
+        this.inventory = ["Potion", "Potion", "Ether", "Morceau d'étoile"];
     }
 
 
@@ -66,9 +68,9 @@ function _fight() {
             turn = "protagonistturn";
         }
         if (turn === "protagonistturn") {
-            fmenu = prompt("Que voulez vous faire?/n Attaquer/n Se Défendre/n Utiliser un objet/n Quitter");
+            fmenu = prompt("Que voulez vous faire?\n Attaquer\n Se Défendre\n Utiliser un objet\n Quitter");
             if (fmenu === "Attaquer") {
-                whichattack = prompt("Quelle attaque voulez-vous utiliser?/n Attaque Physique/n Attaque Magique/n Attaque Spéciale");
+                whichattack = prompt("Quelle attaque voulez-vous utiliser?\n Attaque Physique\n Attaque Magique\n Attaque Spéciale");
                 if (whichattack === "Attaque Physique") {
                     console.log("Vous attaquez physiquement!");
                     touchingattack = Math.floor((Math.random() * 100) + 1);
@@ -113,7 +115,7 @@ function _fight() {
                 }
             }
             if (fmenu === "Utiliser un objet") {
-                fobjet = prompt("Que voulez vous utiliser comme objet?/n Potion/n Morceau d'étoile/n Demi étoile/n Ether/n");
+                fobjet = prompt("Que voulez vous utiliser comme objet?\n Potion\n Morceau d'étoile\n Demi étoile\n Ether\n");
                 if (fobjet === "Potion") {
                     protagonist.HPCurrent = (protagonist.HPCurrent)+ 0.5*(protagonist.HPMax);
                     if (protagonist.HPCurrent > protagonist.HPMax) {
@@ -140,9 +142,6 @@ function _fight() {
                     protagonist.mana = protagonist.mana + 0.3*(protagonist.mana);
                 }
             }
-            if (fmenu === "Quitter") {
-                return;
-            }
         }
         if (turn === "antagonistturn") {
             console.log("C'est au tour de l'ennemi!!");
@@ -165,3 +164,4 @@ _fight;
 
 
 export { _fight };
+export { _Character }

@@ -51,14 +51,14 @@ class Menu {
     }
 }
 
-//Utilisation de la classe Menu
-(async () => {
-    // Création d'une instance de Menu avec une question et des options
-    const menu = new Menu("Choisissez une option:", ["Se déplacer", "Ouvrir un coffre", "Quitter"]);
-    // Appel de la méthode askUser pour obtenir le choix de l'utilisateur
-    const userChoice = await menu.askUser();
-    // Affichage de l'option choisie par l'utilisateur
-    console.log(`\x1b[32mVous avez choisis:\x1b[0m ${menu.options[userChoice - 1]}`);
-})();
+// //Utilisation de la classe Menu
+// (async () => {
+//     // Création d'une instance de Menu avec une question et des options
+//     const menu = new Menu("Choisissez une option:", ["Se déplacer", "Ouvrir un coffre", "Quitter"]);
+//     // Appel de la méthode askUser pour obtenir le choix de l'utilisateur
+//     const userChoice = await menu.askUser();
+//     // Affichage de l'option choisie par l'utilisateur
+//     console.log(`\x1b[32mVous avez choisis:\x1b[0m ${menu.options[userChoice - 1]}`);
+// })();
 
 export { Menu };
