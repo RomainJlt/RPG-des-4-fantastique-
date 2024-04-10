@@ -2,11 +2,11 @@ import { Character, Monster } from "./class.ts";
 
 
 // Name, physicalAttack, physicalDefense, magicalAttack, magicalDefense, speed, HPMax, HPCurrent, attackPotency, canBeHurt, canBeCured, canBeResurrected 
-export const Guerrier =    new Character("Théophile Le Luisant",               40, 70, 0, 0, 50, 100, 100, 80, false, false, false);
-export const Mage =        new Character("Merlin Gros Baton",                  10, 10, 50, 30, 50, 100, 100, 80, false, false, false);
-export const Paladin =     new Character("Dartagnan Durex",                    30, 75, 20, 50, 60, 100, 100, 80, false, false, false);
-export const Barbare =     new Character("Marcel Le Pénètrepeau",              30, 10, 0, 0, 30, 100, 100, 80, false, false, false);
-export const Prêtre =      new Character("Jean De Pédolandie",                 20, 10, 100, 100, 100, 80, false, false, false);
+export const Guerrier =    new Character("Théophile Le Luisant",               40, 70, 0, 0, 0, 50, 100, 100, 80, false, false, false);
+export const Mage =        new Character("Merlin Gros Baton",                  10, 10, 50, 30, 100, 50, 100, 100, 80, false, false, false);
+export const Paladin =     new Character("Dartagnan Durex",                    30, 75, 20, 50, 0, 60, 100, 100, 80, false, false, false);
+export const Barbare =     new Character("Marcel Le Pénètrepeau",              30, 10, 0, 0, 0, 30, 100, 100, 80, false, false, false);
+export const Prêtre =      new Character("Jean De Pédolandie",                 20, 10, 100, 100, 0, 100, 80, false, false, false);
 export const Voleur =      new Character("Marcus Le Voleur D'Innocence",       50, 50, 80, 100, 100, 80, false, false, false);
 
 
