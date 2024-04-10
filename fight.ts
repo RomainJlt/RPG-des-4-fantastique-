@@ -3,43 +3,6 @@ import { chooseGroup, enemyGroup } from "./chooseGroup.ts";
 import { adventurers, monsters} from "./chooseGroup.ts";
 
 
-class _Character{
-    name: string;
-    physicalAttack: number;
-    physicalDefense: number;
-    magicalAttack: number;
-    magicalDefense: number;
-    mana: number;  
-    speed: number;
-    
-    HPMax: number;
-    HPCurrent: number;
-    attackPotency: number;
-    canBeHurt: boolean;
-    canBeCured: boolean;
-    canBeResurrected: boolean;
-
-
-    constructor(name : string, physicalAttack : number, physicalDefense : number, magicalAttack : number, magicalDefense : number, mana : number, speed : number, HPMax : number, HPCurrent : number, attackPotency : number, canBeHurt : boolean, canBeCured : boolean, canBeResurrected: boolean){
-        this.name = name;
-        this.physicalAttack = physicalAttack;
-        this.physicalDefense = physicalDefense;
-        this.magicalAttack = magicalAttack;
-        this.magicalDefense = magicalDefense;
-        this.mana = mana;
-        this.speed = speed;
-        this.HPMax = HPMax;
-        this.HPCurrent = HPCurrent;
-        this.attackPotency = attackPotency;
-        this.canBeHurt = canBeHurt;
-        this.canBeCured = canBeCured;
-        this.canBeResurrected = canBeResurrected;
-    }
-
-
-
-
-}
 
 
 
@@ -206,12 +169,16 @@ function _fight() {
                             console.log("Vous ne volez rien !");
                         }else if (thief <= 70) {
                             console.log("Vous avez volé une potion !");
+                            push("position")
                         }else if (thief <= 85) {
                             console.log("Vous avez volé un fragment d'étoile !");
+                            push("fragment")
                         }else if (thief <= 95) {
                             console.log("Vous avez volé un éther !");
+                            push("ether")
                         }else if (thief <= 100) {
                             console.log("Vous avez volé une demi-étoile !");
+                            push("demi-etoile")
                         }
                     }
                     
