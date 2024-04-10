@@ -147,16 +147,16 @@ function _fight() {
                             console.log("Vous ne volez rien !");
                         }else if (thief <= 70) {
                             console.log("Vous avez volé une potion !");
-                            push("position")
+                            inventory.push("position");
                         }else if (thief <= 85) {
                             console.log("Vous avez volé un fragment d'étoile !");
-                            push("fragment")
+                            inventory.push("fragment")
                         }else if (thief <= 95) {
                             console.log("Vous avez volé un éther !");
-                            push("ether")
+                            inventory.push("ether")
                         }else if (thief <= 100) {
                             console.log("Vous avez volé une demi-étoile !");
-                            push("demi-etoile")
+                            inventory.push("demi-etoile")
                         }
                     }
                 }
