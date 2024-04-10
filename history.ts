@@ -5,7 +5,7 @@ import { Menu } from "./menu.ts";
 
 class Dungeon {
     private randomMonsters: Monster[];
-    private boss: Monster;
+    private boss: Monster[];
 
     constructor(randomMonsters: Monster[], boss: Monster[]) {
         this.randomMonsters = randomMonsters;
