@@ -121,10 +121,53 @@ function _fight() {
                         console.log(`Vous avez désormais ${protagonist.HPCurrent}`);
                         turn = "antagonistturn";
                         i = 0;
-                    }
+                    } else if (adventurers[i].classAdventur === prêtre) {
+                        let soin: string | null= "";
+                        console.log("Vous utilisez une action de soin!")
+                        soin = prompt("Restaurer 25% de point de vie à un aventurier( ${adventurers[i].name} , ${adventurers[i+1].name} ou $    {adventurers[i+2].name}")
+                        if (soin === adventurers[i].name){
+                            console.log("Vous restaurer 25% de point de vie à ${adventurers[i].name})!")
+                            protagonist.HPCurrent= protagonist.HPCurrent - (100/4);
+                        } else if (soin === adventurers[i+1].name) {
+                            console.log("Vous restaurer 25% de point de vie à ${adventurers[i+1].name})!")
+                            protagonist.HPCurrent= protagonist.HPCurrent - (100/4);
+                        } else if (soin === adventurers[i+2].name){
+                            console.log("Vous restaurer 25% de point de vie à ${adventurers[i+2].name})!")
+                            protagonist.HPCurrent= protagonist.HPCurrent - (100/4); 
+                        }
                     
+                    
+
+                    } else if (adventurers[i].classAdventur === voleur) {
+                        console.log("Vous volez un objet dans un coin de la pièce.");
+                        let thief: number = 0;
+                        thief = Math.floor((Math.random() * 100) + 1);
+                        //40% de chances de ne rien voler, 30% d'obtenir une potion, 15% d'obtenir un fragment d'étoile, 10% d'obtenir un éther et  5% d'obtenir une demi-étoile
+                        if (thief <= 40) {
+                            console.log("Vous ne volez rien !");
+                        }else if (thief <= 70) {
+                            console.log("Vous avez volé une potion !");
+                            push("position")
+                        }else if (thief <= 85) {
+                            console.log("Vous avez volé un fragment d'étoile !");
+                            push("fragment")
+                        }else if (thief <= 95) {
+                            console.log("Vous avez volé un éther !");
+                            push("ether")
+                        }else if (thief <= 100) {
+                            console.log("Vous avez volé une demi-étoile !");
+                            push("demi-etoile")
+                        }
+                    }
                 }
-            }
+            }            
+        }
+    }
+
+
+
+
+
             if (fmenu === "Se Défendre") {
                 console.log("Vous vous défendez!")
                 i = i + 1;
