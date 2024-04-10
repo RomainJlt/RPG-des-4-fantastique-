@@ -52,6 +52,8 @@ const attackMenu = new Menu("Quelle attaque voulez-vous utiliser?", ["Attaque Ph
 const objectMenu = new Menu("Que voulez-vous utiliser comme objet?", ["Potion", "Morceau d'étoile", "Demi étoile", "Ether"]);
 
 async function _fight() {
+    let i = 0;
+    let j = 0;
     let turn: string = "";
     let fmenu: number | null = null;
     let fobjet: number | null = null;
@@ -74,36 +76,81 @@ async function _fight() {
             if (fmenu === 1) {
                 whichattack = await attackMenu.askUser();
                 if (whichattack === 1) {
-                    console.log("Vous attaquez physiquement!");
+                console.log("Vous attaquez physiquement!");
+                touchingattack = Math.floor((Math.random() * 100) + 1);
+                if (touchingattack < protagonist.attackPotency) {
+                    console.log("L'attaque touche!");
+                    let damage = protagonist.physicalAttack - antagonist.physicalDefense;
+                    antagonist.HPCurrent -= Math.max(damage, 0);
+                }
+                else {
+                    console.log("Votre attaque échoue!");
+                }
+                console.log(`L'ennemi a désormais ${antagonist.HPCurrent}`);
+                i = i + 1;
+                if (i > 2) {
+                    turn = "antagonistturn";
+                    i = 0;
+                }
+                
+            } else if (whichattack === 2) {
+                    console.log("Vous attaquez magiquement!");
                     touchingattack = Math.floor((Math.random() * 100) + 1);
                     if (touchingattack < protagonist.attackPotency) {
                         console.log("L'attaque touche!");
-                        let damage = protagonist.physicalAttack - antagonist.physicalDefense;
+                        let damage = protagonist.magicalAttack - antagonist.magicalDefense;
                         antagonist.HPCurrent -= Math.max(damage, 0);
+                        protagonist.mana = protagonist.mana - 10;
+                    }
+                    else {
+                        console.log("Votre attaque échoue!");
                     }
                     console.log(`L'ennemi a désormais ${antagonist.HPCurrent}`);
-                    turn = "antagonistturn";
+                    i = i + 1;
+                    if (i > 2) {
+                        turn = "antagonistturn";
+                        i = 0;
+                    }
+                    
                 }
-                } else if (whichattack === 2) {
-                    // Logique pour attaque magique...
                 } else if (whichattack === 3) {
-                    // Logique pour attaque spéciale...
-                }
+                    console.log("Vous utilisez une attaque spéciale!")
+                    touchingattack = Math.floor((Math.random() * 100) + 1);
+                    if (touchingattack < protagonist.attackPotency) {
+                        console.log("L'attaque touche!");
+                        antagonist.HPCurrent = antagonist.HPCurrent - protagonist.physicalAttack + antagonist.physicalDefense;
+                        if (antagonist.physicalDefense > protagonist.physicalAttack) {
+                            antagonist.HPCurrent = antagonist.HPCurrent - 0;
+                        }                        
+                    }
+                    else {
+                        console.log("Votre attaque échoue!");
+                    }
+                    console.log(`L'ennemi a désormais ${antagonist.HPCurrent}`);
+                    i = i + 1;
+                    if (i > 2) {
+                        turn = "antagonistturn";
+                        i = 0;
+                    }
+
             } else if (fmenu === 2) {
-                // Logique pour la défense...
+                console.log("Vous vous défendez!")
+                i = i + 1;
+                if (i > 2) {
+                    turn = "antagonistturn";
+                    i = 0;
+                }
             } else if (fmenu === 3) {
                 fobjet = await objectMenu.askUser();
                 // Logique pour l'utilisation d'objet...
-            } else if (fmenu === 4) {
-                // Logique pour quitter...
-            }
+            } 
         }
 
         // Suite du code de la boucle de combat...
     }
 
     // Logique pour la fin du combat...
-
+}
 
 _fight();
 
