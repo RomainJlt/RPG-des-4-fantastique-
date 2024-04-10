@@ -19,7 +19,7 @@ class Menu {
 
         // Vérification de la validité de l'entrée de l'utilisateur
         if (!this.isValidInput(userInput)) {
-            console.log("\x1b[31mInvalid choice. Please try again.\n\x1b[0m");
+            console.log("\x1b[31mChoix invalide, veuillez réessayer.\n\x1b[0m");
             return await this.askUser(); // Appel récursif pour redemander à l'utilisateur de choisir
         }
         // Conversion de l'entrée utilisateur en nombre et retour de cette valeur
@@ -54,9 +54,11 @@ class Menu {
 //Utilisation de la classe Menu
 (async () => {
     // Création d'une instance de Menu avec une question et des options
-    const menu = new Menu("Choose an option:", ["Move", "Open A Chest", "Leave"]);
+    const menu = new Menu("Choisissez une option:", ["Se déplacer", "Ouvrir un coffre", "Quitter"]);
     // Appel de la méthode askUser pour obtenir le choix de l'utilisateur
     const userChoice = await menu.askUser();
     // Affichage de l'option choisie par l'utilisateur
-    console.log(`\x1b[32mYou chose:\x1b[0m ${menu.options[userChoice - 1]}`);
+    console.log(`\x1b[32mVous avez choisis:\x1b[0m ${menu.options[userChoice - 1]}`);
 })();
+
+export { Menu };

@@ -40,5 +40,8 @@ export function enemyGroup(): Monster[] {
     return chosenMonsters;
     console.log(chosenMonsters);
 }
-const adventurers: Character[] = chooseGroup();
+export const adventurers: Character[] = chooseGroup();
+
+export const monsters = enemyGroup();
+
 _fight();

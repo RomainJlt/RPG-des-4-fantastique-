@@ -1,5 +1,6 @@
 import { Character } from "./persoMonster.ts";
 import { chooseGroup, enemyGroup } from "./chooseGroup.ts";
+import { adventurers, monsters} from "./chooseGroup.ts";
 
 
 class _Character{
@@ -41,30 +42,35 @@ class _Character{
 }
 
 
-const adventurers = chooseGroup();
-const protagonist = adventurers[0];
-const monsters = enemyGroup();
-const antagonist = monsters[0];
-    
+
 
 
 
 function _fight() {
+    let i = 0;
+    let j = 0;
+    let protagonist = adventurers[i];
+    let antagonist = monsters[j];
+   
     console.log("Un ennemi apparaît!!");
-    let turn: string = "";
+    
     let fmenu: string | null= "";
     let fobjet: string | null = "";
     let whichattack: string | null= "";
     let touchingattack: number = 0;
-    while (protagonist.HPCurrent > 0 && antagonist.HPCurrent > 0) {
+    let turn: string = "";
+    while (protagonist.HPCurrent > 0 && antagonist.HPCurrent > 0) {        
+        
+        
+        
         if (antagonist.speed > protagonist.speed) {
             turn = "antagonistturn";
         }
         else if (protagonist.speed > antagonist.speed) {
-            turn = "antagonistturn";
+            turn = "protagonistturn";
         }
         if (turn === "protagonistturn") {
-            fmenu = prompt("Que voulez vous faire?/n Attaquer/n Se Défendre/n Utiliser un objet/n Quitter");
+            fmenu = prompt(`Que voulez vous faire en tant que ${adventurers[i].name}?/n Attaquer/n Se Défendre/n Utiliser un objet`);
             if (fmenu === "Attaquer") {
                 whichattack = prompt("Quelle attaque voulez-vous utiliser?/n Attaque Physique/n Attaque Magique/n Attaque Spéciale");
                 if (whichattack === "Attaque Physique") {
@@ -79,7 +85,12 @@ function _fight() {
                         console.log("Votre attaque échoue!");
                     }
                     console.log(`L'ennemi a désormais ${antagonist.HPCurrent}`);
-                    turn = "antagonistturn";
+                    i = i + 1;
+                    if (i > 2) {
+                        turn = "antagonistturn";
+                        i = 0;
+                    }
+                    
                 }
                 if (whichattack === "Attaque Magique") {
                     console.log("Vous attaquez magiquement!");
@@ -93,7 +104,12 @@ function _fight() {
                         console.log("Votre attaque échoue!");
                     }
                     console.log(`L'ennemi a désormais ${antagonist.HPCurrent}`);
-                    turn = "antagonistturn";
+                    i = i + 1;
+                    if (i > 2) {
+                        turn = "antagonistturn";
+                        i = 0;
+                    }
+                    
                 }
                 if (whichattack === "Attaque Spéciale") {
                     console.log("Vous utilisez une attaque spéciale!")
@@ -109,14 +125,20 @@ function _fight() {
                         console.log("Votre attaque échoue!");
                     }
                     console.log(`L'ennemi a désormais ${antagonist.HPCurrent}`);
-                    turn = "antagonistturn";
+                    i = i + 1;
+                    if (i > 2) {
+                        turn = "antagonistturn";
+                        i = 0;
+                    }
+                    
                 }
             }
             if (fmenu === "Se Defendre") {
                 console.log("Vous vous défendez!")
-                if (turn === "antagonistturn") {
-                    protagonist.physicalDefense = (protagonist.physicalDefense)*1.75;
-                    protagonist.magicalDefense = (protagonist.magicalDefense)*1.75;
+                i = i + 1;
+                if (i > 2) {
+                    turn = "antagonistturn";
+                    i = 0;
                 }
             }
             if (fmenu === "Utiliser un objet") {
@@ -147,18 +169,28 @@ function _fight() {
                 if (fobjet === "Ether") {
                     protagonist.mana = protagonist.mana + 0.3*(protagonist.mana);
                 }
-            }
-            if (fmenu === "Quitter") {
-                return;
+                i = i + 1;
+                if (i > 2) {
+                    turn = "antagonistturn";
+                    i = 0;
+                }
             }
         }
         if (turn === "antagonistturn") {
             console.log("C'est au tour de l'ennemi!!");
             console.log("L'ennemi attaque!!");
+            if (fmenu === "Se Défendre") {
+                protagonist.physicalDefense = protagonist.physicalDefense*1.75;
+                protagonist.magicalDefense = protagonist.magicalDefense*1.75;
+            }
             let damage = antagonist.physicalAttack - protagonist.physicalDefense;
             protagonist.HPCurrent -= Math.max(damage, 0); 
             console.log(`Vous avez désormais ${protagonist.HPCurrent} point de vie!`)
-            turn = "protagonistturn";
+            j = j + 1;
+            if (j > 2) {
+                turn = "protagonistturn";
+                j = 0;
+            }
         }
     }
     if (antagonist.HPCurrent <= 0) {

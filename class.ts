@@ -5,6 +5,7 @@ export class Character {
     physicalDefense: number;
     magicalAttack: number;
     magicalDefense: number;
+    mana: number;
     speed: number;
     HPMax: number;
     HPCurrent: number;
@@ -26,16 +27,17 @@ export class Character {
      * @param canBeCured 
      * @param canBeResurrected 
      */
-    constructor(name: string, physicalAttack: number, physicalDefense: number, magicalAttack: number, magicalDefense: number, speed: number, HPMax: number, HPCurrent: number, attackPotency: number, canBeHurt: boolean, canBeCured: boolean, canBeResurrected: boolean) {
+    constructor(name: string, physicalAttack: number, physicalDefense: number, magicalAttack: number, magicalDefense: number, mana: number, speed: number, HPMax: number, HPCurrent: number, attackPotency: number, canBeHurt: boolean, canBeCured: boolean, canBeResurrected: boolean) {
 
         this.name = name;
         this.physicalAttack = physicalAttack;
         this.physicalDefense = physicalDefense;
         this.magicalAttack = magicalAttack;
         this.magicalDefense = magicalDefense;
+        this.mana = mana;
         this.speed = speed;
         this.HPMax = HPMax;
-        this.HPMax = HPMax;
+        
         this.HPCurrent = HPCurrent;
         this.attackPotency = attackPotency;
         this.canBeHurt = canBeHurt;
@@ -48,6 +50,7 @@ export class Monster {
     name: string;
     physicalAttack: number;
     physicalDefense: number;
+    magicalDefense: number;
     speed: number;
     HPMax: number;
     HPCurrent: number;
@@ -64,13 +67,14 @@ export class Monster {
  * @param HPCurrent The current HP of the monster
  * @param attackPotency The potential for a successful attack
  */
-    constructor(name: string, physicalAttack: number, physicalDefense: number, speed: number, HPMax: number, HPCurrent: number, attackPotency: number) {
+    constructor(name: string, physicalAttack: number, physicalDefense: number, magicalDefense: number, speed: number, HPMax: number, HPCurrent: number, attackPotency: number) {
         this.name = name;
         this.physicalAttack = physicalAttack;
         this.physicalDefense = physicalDefense;
+        this.magicalDefense = magicalDefense;
         this.speed = speed;
         this.HPMax = HPMax;
-        this.HPMax = HPMax;
+        
         this.HPCurrent = HPCurrent;
         this.attackPotency = attackPotency;
     }
