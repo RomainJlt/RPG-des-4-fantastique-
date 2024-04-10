@@ -70,9 +70,9 @@ function _fight() {
             turn = "protagonistturn";
         }
         if (turn === "protagonistturn") {
-            fmenu = prompt("Que voulez vous faire?/n Attaquer/n Se Défendre/n  Utiliser un objet/n Quitter");
+            fmenu = prompt("Que voulez vous faire?/n Attaquer/n Se Défendre/n  Utiliser un objet/n Quitter :");
             if (fmenu === "Attaquer") {
-                whichattack = prompt("Quelle attaque voulez-vous utiliser?/n Attaque Physique/n Attaque Magique/n Attaque Spéciale");
+                whichattack = prompt("Quelle attaque voulez-vous utiliser?/n Attaque Physique/n Attaque Magique/n Attaque Spéciale :");
                 if (whichattack === "Attaque Physique") {
                     console.log("Vous attaquez physiquement!");
                     touchingattack = Math.floor((Math.random() * 100) + 1);
