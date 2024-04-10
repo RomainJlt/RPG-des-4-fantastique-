@@ -161,12 +161,8 @@ function _fight() {
                     }
                 }
             }            
-        }
-    }
-
-
-
-
+        
+    
 
             if (fmenu === "Se Défendre") {
                 console.log("Vous vous défendez!")
