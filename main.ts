@@ -1,3 +1,4 @@
-import { _chooseGroup } from "./chooseGroup";
+import { _fight } from "./fight.ts";
+import { chooseGroup } from "./chooseGroup.ts"; 
+import {}
 
-_chooseGroup();

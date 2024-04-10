@@ -1,9 +1,9 @@
-import { _fight } from "./fight.ts"
-import { Monster } from "./class.ts"
-import { Character, humain } from "./persoMonster.ts"
-import { Menu } from "./menu.ts"
+import { _fight } from "./fight.ts";
+import { Monster } from "./class.ts";
+import { monster, dragon } from "./persoMonster.ts";
+import { Menu } from "./menu.ts";
 
-class Dungeon {
+export class Dungeon {
     private randomMonsters: Monster[];
     private boss: Monster[];
 
@@ -14,9 +14,9 @@ class Dungeon {
 
     async explore(): Promise<void>{
         console.log("Vous entrez dans le donjon...");
-        await this._exploreRoomWithCombat(3);
+        await this.exploreRoomWithCombat(3);
         this.openChest();
-        await this._exploreRoomWithCombat(3);
+        await this.exploreRoomWithCombat(3);
         this.openChest();
         this.fightBoss();
     }
@@ -24,47 +24,47 @@ class Dungeon {
     private async exploreRoomWithCombat(numberOfMonsters: number): Promise<void> {
         console.log("Vous entrez dans une salle...");
         console.warn("Des monstres apparaissent: Début du combat...");
-        const chosenMonsters = this.chooseRandomMonster(numberOfMonsters);
+        const chosenMonsters = this.chooseRandomMonsters(numberOfMonsters);
         for(const monster of chosenMonsters){
             console.log(`Un ${monster.name} apparaît !`);
         }
         await _fight();
     }
-    private chooseRandomMonster(numberOfMonsters: number): Monster[] {
+
+    public chooseRandomMonsters(numberOfMonsters: number): Monster[] {
         const chosenMonsters: Monster[] = [];
         for(let i = 0; i < numberOfMonsters; i++){
-            chosenMonsters.push(this.randomMonsters());
+            const randomIndex = Math.floor(Math.random() * this.randomMonsters.length);
+            chosenMonsters.push(this.randomMonsters[randomIndex]);
         }
         return chosenMonsters;
     }
+
     private openChest(): void {
         const chestMenu = new Menu("Vous trouvez un coffre! Que voulez-vous faire?", ["Ouvrir le coffre", "Laisser le coffre"]);
-        const choice = chestMenu.askUser();
-        if(choice === 1){
-            const trapProbability = Math.random();
-            if(trapProbability < 0.3){
-                console.log("Le coffre était piégé. Vous êtes blessé!");
-                //Dégats du trap sur le personnage
+        const choicePromise = chestMenu.askUser();
+        choicePromise.then((choice) => {
+            if(choice === 1){
+                const trapProbability = Math.random();
+                if(trapProbability < 0.3){
+                    console.log("Le coffre était piégé. Vous êtes blessé!");
+                    //Dégats du trap sur le personnage
+                } else {
+                    console.log("Vous trouvez les récompenses dans le coffre!"); //récompense random
+                    //Donner la récompense
+                }
             } else {
-                console.log("Vous trouvez les récompenses dans le coffre!"); //récompense random
-                //Donner la récompense
+                console.log("Vous décidez de ne pas ouvrir le coffre!"); 
             }
-        } else {
-            console.log("Vous décidez de ne pas ouvrir le coffre!"); 
-        }
+        });
     }
+
     private fightBoss(): void {
         console.log("Vous entrez dans la salle du Boss...");
-        console.warn(`Un ${this.boss.name} apparaît!`);
+        console.warn(`Un ${this.boss[0].name} apparaît!`);
         _fight();
     }
 }
 
-// const randomMonsters = Monster[] = [
-
-// ];
-
-import  { dragon } from "./persoMonster";
-
-const dungeon = new Dungeon(randomMonsters, dragon);
+export const dungeon = new Dungeon(monster, dragon);
 dungeon.explore();
