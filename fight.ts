@@ -90,8 +90,6 @@ function _fight() {
                         console.log("L'attaque touche!");
                         let damage = protagonist.magicalAttack - antagonist.magicalDefense;
                         antagonist.HPCurrent -= Math.max(damage, 0);
-                    }
-                    else {
                         console.log("Votre attaque échoue!");
                         if (protagonist.mana > 25) {
                             let damage = protagonist.magicalAttack;
@@ -105,20 +103,19 @@ function _fight() {
                             console.log("Vous n'avez pas assez de mana!");
                         }
                     }else{
-                        console.log("L'attaque à échoué!");
+                        console.log("Votre attaque échoue!");
                     }
                     console.log(`L'ennemi a désormais ${antagonist.HPCurrent}`);
                     turn = "antagonistturn";
                 }
+
+
                 if (whichattack === "Attaque Spéciale") {
                     console.log("Vous utilisez une attaque spéciale!")
                     touchingattack = Math.floor((Math.random() * 100) + 1);
                     if (touchingattack < protagonist.attackPotency) {
                         console.log("L'attaque touche!");
-                        antagonist.HPCurrent = antagonist.HPCurrent - protagonist.physicalAttack + antagonist.physicalDefense;
-                        if (antagonist.physicalDefense > protagonist.physicalAttack) {
-                            antagonist.HPCurrent = antagonist.HPCurrent - 0;
-                        }                        
+                        antagonist.HPCurrent = antagonist.HPCurrent - protagonist.physicalAttack + antagonist.physicalDefense;                      
                     }
                     else {
                         console.log("Votre attaque échoue!");
@@ -126,6 +123,136 @@ function _fight() {
                     console.log(`L'ennemi a désormais ${antagonist.HPCurrent}`);
                     turn = "antagonistturn";
                 }
+
+
+
+                if (whichattack === "Attaque Spéciale") {
+                    if (protagonist === Guerrier) {
+                    console.log("Vous n'avez pas d'attaque spéciale!")
+                    
+
+                    } else if (protagonist === Mage) {
+                        console.log("Vous n'avez pas d'attaque spéciale!")
+
+
+
+                    } else if (protagonist === Paladin) {
+                        console.log("Vous utilisez une attaque spéciale sainte!")
+                        touchingattack = Math.floor((Math.random() * 100) + 1);
+                        if (touchingattack < protagonist.attackPotency) {
+                            console.log("L'attaque touche!");
+                            antagonist.HPCurrent = antagonist.HPCurrent - ((protagonist.physicalAttack - antagonist.physicalDefense)*0.4);                      
+                        }
+                        else {
+                            console.log("Votre attaque échoue!");
+                        }
+                        console.log(`L'ennemi a désormais ${antagonist.HPCurrent}`);
+                        turn = "antagonistturn";
+
+
+
+
+                    } else if (protagonist === Barbare) {
+                        console.log("Vous utilisez une attaque spéciale Berserk!")
+                        touchingattack = Math.floor((Math.random() * 100) + 1);
+                        if (touchingattack < protagonist.attackPotency) {
+                            console.log("L'attaque touche!");
+                            antagonist.HPCurrent = antagonist.HPCurrent - ((protagonist.physicalAttack - antagonist.physicalDefense)*1.3);
+                            protagonist.HPCurrent= protagonist.HPCurrent - 20;                   
+                        }
+                        else {
+                            console.log("Votre attaque échoue!");
+                        }
+                        console.log(`L'ennemi a désormais ${antagonist.HPCurrent}`);
+                        console.log(`Vous avez désormais ${protagonist.HPCurrent}`);
+                        turn = "antagonistturn";
+
+
+
+                    } else if (protagonist === Prêtre) {
+                        console.log("Vous utilisez une action de soin!")
+                        soin = prompt("Restaurer 25% de point de vie à un aventurier( 1er aventurier , 2eme aventurier ou 3eme aventurier")
+                        if (soin === "1er aventurier && 2eme aventurier && 3eme aventurier") {
+                            console.log("Vous restaurer 25% de point de vie à un aventurier!")
+                            protagonist.HPCurrent= protagonist.HPCurrent - (100/4);
+                        }
+
+
+
+
+
+
+
+
+
+
+                    } else if (protagonist === Voleur) {
+                        attaqueSpecialeVoleur(antagonist); 
+                    }
+
+
+                }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             }
             if (fmenu === "Se Defendre") {
                 console.log("Vous vous défendez!")
