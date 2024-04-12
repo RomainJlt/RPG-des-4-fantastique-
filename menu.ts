@@ -1,3 +1,4 @@
+import { Deno } from 'deno';
 class Menu {
     question: string;
     options: string[];
