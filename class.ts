@@ -14,6 +14,7 @@ export class Character {
     canBeHurt: boolean;
     canBeCured: boolean;
     canBeResurrected: boolean;
+    isKO: boolean;
 
     /**
      * 
@@ -28,7 +29,7 @@ export class Character {
      * @param canBeCured 
      * @param canBeResurrected 
      */
-    constructor( classAdventur: string , name: string, physicalAttack: number, physicalDefense: number, magicalAttack: number, magicalDefense: number, mana: number, speed: number, HPMax: number, HPCurrent: number, attackPotency: number, canBeHurt: boolean, canBeCured: boolean, canBeResurrected: boolean) {
+    constructor(name: string, physicalAttack: number, physicalDefense: number, magicalAttack: number, magicalDefense: number, mana: number, speed: number, HPMax: number, HPCurrent: number, attackPotency: number, canBeHurt: boolean, canBeCured: boolean, canBeResurrected: boolean, isKO: boolean) {
 
         this.classAdventur = classAdventur;
         this.name = name;
@@ -44,6 +45,7 @@ export class Character {
         this.canBeHurt = canBeHurt;
         this.canBeCured = canBeCured;
         this.canBeResurrected = canBeResurrected;
+        this.isKO = isKO;
     }
 }
 

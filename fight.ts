@@ -2,28 +2,39 @@ import { Character } from "./persoMonster.ts";
 import { chooseGroup, enemyGroup } from "./chooseGroup.ts";
 import { adventurers, monsters} from "./chooseGroup.ts";
 
-function _fight() {
+
+
+export function _fight() {
     let i = 0;
     let j = 0;
     let protagonist = adventurers[i];
     let antagonist = monsters[j];
     let inventory = ["Potion", "Potion", "Morceau d'étoile", "Demi étoile", "Ether"];
     let nbKO : number = 0; 
-    let nbKOenemy : number = 0;
-   
-    console.log("Un ennemi apparaît!!");
-    
+    let nbKOenemy : number = 0;    
     let fmenu: string | null= "";
     let fobjet: string | null = "";
     let whichattack: string | null= "";
     let touchingattack: number = 0;
     let turn: string = "";
-    while (nbKO !== 2 || nbKOenemy!== 2) {        
+    while (protagonist.HPCurrent > 0 || antagonist.HPCurrent > 0) {        
         if (antagonist.speed > protagonist.speed) {
             turn = "antagonistturn";
         }
         else if (protagonist.speed > antagonist.speed) {
             turn = "protagonistturn";
+        }
+        if (antagonist.HPCurrent <= 0) {
+            nbKOenemy++;
+            if (nbKOenemy < monsters.length) { 
+                j++; 
+                antagonist = monsters[j]; 
+            }
+            console.log(`${antagonist.name} est mort!`);
+            return; 
+        }
+        if (protagonist.HPCurrent <= 0) {
+            nbKO = nbKO + 1;
         }
         if (turn === "protagonistturn") {
             fmenu = prompt(`Que voulez vous faire en tant que ${adventurers[i].name}?\n Attaquer\n Se Défendre\n Utiliser un objet\n Voir l'inventaire`);
@@ -223,40 +234,30 @@ function _fight() {
         }
         if (turn === "antagonistturn") {
             console.log("C'est au tour de l'ennemi!!");
-            while (j <= 2) {
+            while (j <= monsters.length - 1) { 
                 console.log(`${monsters[j].name} attaque!!`);
                 if (fmenu === "Se Défendre") {
-                    protagonist.physicalDefense = protagonist.physicalDefense*1.75;
-                    protagonist.magicalDefense = protagonist.magicalDefense*1.75;
+                    protagonist.physicalDefense = protagonist.physicalDefense * 1.75;
+                    protagonist.magicalDefense = protagonist.magicalDefense * 1.75;
                 }
                 let damage = antagonist.physicalAttack - protagonist.physicalDefense;
-                protagonist.HPCurrent -= Math.max(damage, 0); 
-                console.log(`Vous avez désormais ${protagonist.HPCurrent} point de vie!`)
-                j = j + 1;
-                if (j > 2) {
-                    turn = "protagonistturn";
-                }
+                protagonist.HPCurrent -= Math.max(damage, 0);
+                console.log(`Vous avez désormais ${protagonist.HPCurrent} point de vie!`);
+                j++;
             }
-            j = 0;
         }
-        if (protagonist.HPCurrent <= 0) {
-            nbKO = nbKO + 1;
-        }
-        if (antagonist.HPCurrent <= 0) {
-            nbKOenemy = nbKOenemy + 1;
-        }
-
+        i = (i + 1) % 3; 
+        j = (j + 1) % monsters.length;        
     }
-    if (nbKOenemy === 2) {
+      
+    if (nbKOenemy === monsters.length) {
         console.log("L'ennemi est vaincu, vous avez gagné!");
-    } 
-    if (nbKO === 2) {
+    } else if (nbKO === 2) {
         console.log("Vous êtes vaincu. La partie est terminée");
     }
+    return;
 }
+      
 
-_fight;
 
-
-export { _fight };
 
