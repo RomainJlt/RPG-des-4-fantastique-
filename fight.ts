@@ -161,8 +161,8 @@ function _fight() {
                     }
                 }
             }            
-        }
-    }
+        
+    
 
 
 
