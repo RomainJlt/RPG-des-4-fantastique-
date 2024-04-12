@@ -77,37 +77,6 @@ Le voleur aura une défense moyenne ainsi qu'une attaque physique moyenne, mais 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---------------------------------------------------------------------------------------------------
 
 Monstre
@@ -116,11 +85,6 @@ Les monstres auront des statistiques que vous déterminerez et à chaque tour, a
 20% de chances d'attaquer l'aventurier aux PV les plus bas (vivant)
 80% de chances d'attaquer un aventurier au hasard parmi tous les aventuriers vivants.
 L'attaque sera une attaque physique simple.
-
-
-
-
-
 
 
 

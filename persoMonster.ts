@@ -11,13 +11,8 @@ const prêtre =      new Character("prêtre", "Jean De Pédolandie",            
 const voleur =      new Character("voleur", "Marcus Le Voleur D'Innocence",       50, 50, 0, 10, 0, 80, 100, 100, 80, false, false, false);
 
 
-const bucheron =    new Character("Paul La Grosse Poutre",              100, 100,100, 100, 100, 100, 100, 100, 80, false, false, false);
-const scammer =     new Character("Axel Le Scammer De Mémés Baveuses",  100, 100, 100, 100, 100, 100, 100, 100, 80, false, false, false);
-const geek =        new Character("Romain Ultimement Nul",              100, 100, 100, 100, 100, 100, 100, 100, 80, false, false, false);
-const druide =      new Character("Najm L'Anaconda",                    100, 100, 100, 100, 100, 100, 100, 100, 80, false, false, false);
-const dieu =        new Character("Julien La Divinité",                 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 100, false, false, false);
 
-export const humain : Character[] = [Guerrier, Mage, Paladin, Barbare, Prêtre, Voleur, Bucheron, Scammer, Geek, Druide, Dieu];
+export const humain : Character[] = [guerrier, mage, paladin, barbare, prêtre, voleur];
 
 
 
