@@ -1,7 +1,6 @@
 import { _fight } from "./fight.ts";
-import {  } from "./history.ts";
-import { adventurers } from "./chooseGroup.ts";
 import { fightBoss } from "./history.ts";
+import { adventurers } from "./chooseGroup.ts";
 
 export function processing(){
     let inventory = ["Potion", "Potion", "Morceau d'étoile", "Demi étoile", "Ether"];
