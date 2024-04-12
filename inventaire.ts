@@ -1,5 +1,4 @@
 import { Character } from './class.ts';
-
 export class Inventory {
     items: string[];
 
