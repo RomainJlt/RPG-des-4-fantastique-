@@ -3,57 +3,7 @@ import { Menu } from "./menu.ts";
 import { chooseGroup, enemyGroup } from "./chooseGroup.ts";
 import { adventurers, monsters} from "./chooseGroup.ts";
 
-class _Character{
-    name: string;
-    physicalAttack: number;
-    physicalDefense: number;
-    magicalAttack: number;//
-    magicalDefense: number;//
-    mana: number;  //
-    speed: number;
-    speedPoint: number;//
-    HPMax: number;
-    HPCurrent: number;
-    attackPotency: number;
-    canBeHurt: boolean;
-    canBeCured: boolean;
-    canBeResurrected: boolean;
-    inventory: string[];
-
-
-    constructor(name : string, physicalAttack : number, physicalDefense : number, magicalAttack : number, magicalDefense : number, mana : number, speed : number, speedPoint : number, HPMax : number, HPCurrent : number, attackPotency : number, canBeHurt : boolean, canBeCured : boolean, canBeResurrected: boolean){
-        this.name = name;
-        this.physicalAttack = physicalAttack;
-        this.physicalDefense = physicalDefense;
-        this.magicalAttack = magicalAttack;
-        this.magicalDefense = magicalDefense;
-        this.mana = mana;
-        this.speed = speed;
-        this.speedPoint = speedPoint;
-        this.HPMax = HPMax;
-        this.HPCurrent = HPCurrent;
-        this.attackPotency = attackPotency;
-        this.canBeHurt = canBeHurt;
-        this.canBeCured = canBeCured;
-        this.canBeResurrected = canBeResurrected;
-        this.inventory = ["Potion", "Potion", "Ether", "Morceau d'étoile"];
-    }
-
-
-
-
-}
-
-/*class 
-}*/
-const protagonist = new _Character("Théophile Le Luisant", 70, 40, 50, 100, 100, 80, 0, 200, 200, 100, false, false, false);;
-const antagonist   = new _Character("Axel Le Scammer De Mémés Baveuses",  65, 35, 100, 100, 100, 80, 0, 150, 150, 65, false, false, false);;
-
-const fightMenu = new Menu("Que voulez-vous faire?", ["Attaquer", "Se Défendre", "Utiliser un objet", "Voir l'inventaire"]);
-const attackMenu = new Menu("Quelle attaque voulez-vous utiliser?", ["Attaque Physique", "Attaque Magique", "Attaque Spéciale"]);
-const objectMenu = new Menu("Que voulez-vous utiliser comme objet?", ["Potion", "Morceau d'étoile", "Demi étoile", "Ether"]);
-
-async function _fight() {
+export async function _fight() {
     let i = 0;
     let j = 0;
     let protagonist = adventurers[i];
@@ -67,12 +17,29 @@ async function _fight() {
     let whichattack: number | null = null;
     let touchingattack: number = 0;
 
-    while (nbKO !== 2 || nbKOenemy!== 2) {        
+    const fightMenu = new Menu(`Que voulez vous faire en tant que ${adventurers[i].name}?`, ["Attaquer", "Se Défendre", "Utiliser un objet", "Voir l'inventaire"]);
+    const attackMenu = new Menu("Quelle attaque voulez-vous utiliser?", ["Attaque Physique", "Attaque Magique", "Attaque Spéciale"]);
+    const objectMenu = new Menu("Que voulez-vous utiliser comme objet?", ["Potion", "Morceau d'étoile", "Demi étoile", "Ether"]);
+
+
+    while (protagonist.HPCurrent > 0 || antagonist.HPCurrent > 0) {        
         if (antagonist.speed > protagonist.speed) {
             turn = "antagonistturn";
         }
         else if (protagonist.speed > antagonist.speed) {
             turn = "protagonistturn";
+        }
+        if (antagonist.HPCurrent <= 0) {
+            nbKOenemy++;
+            if (nbKOenemy < monsters.length) { 
+                j++; 
+                antagonist = monsters[j]; 
+            }
+            console.log(`${antagonist.name} est mort!`);
+            return; 
+        }
+        if (protagonist.HPCurrent <= 0) {
+            nbKO = nbKO + 1;
         }
         if (turn === "protagonistturn") {
             fmenu = await fightMenu.askUser();
@@ -187,39 +154,26 @@ async function _fight() {
         }
         if (turn === "antagonistturn") {
             console.log("C'est au tour de l'ennemi!!");
-            while (j <= 2) {
+            while (j <= monsters.length - 1) {
                 console.log(`${monsters[j].name} attaque!!`);
             if (fmenu === 2){
-                protagonist.physicalDefense = protagonist.physicalDefense*1.75;
-                    protagonist.magicalDefense = protagonist.magicalDefense*1.75;
+                protagonist.physicalDefense = protagonist.physicalDefense * 1.75;
+                protagonist.magicalDefense = protagonist.magicalDefense * 1.75;
             }
             let damage = antagonist.physicalAttack - protagonist.physicalDefense;
-                protagonist.HPCurrent -= Math.max(damage, 0); 
-                console.log(`Vous avez désormais ${protagonist.HPCurrent} point de vie!`)
-                j = j + 1;
-                if (j > 2) {
-                    turn = "protagonistturn";
-                }
+            protagonist.HPCurrent -= Math.max(damage, 0);
+            console.log(`Vous avez désormais ${protagonist.HPCurrent} point de vie!`);
+            j++;
             }
-            j = 0;
-    }
-    if (protagonist.HPCurrent <= 0) {
-        nbKO = nbKO + 1;
-    }
-    if (antagonist.HPCurrent <= 0) {
-        nbKOenemy = nbKOenemy + 1;
-    }
+            i = (i + 1) % 3; 
+            j = (j + 1) % monsters.length; 
 
-}
-if (nbKOenemy === 2) {
-    console.log("L'ennemi est vaincu, vous avez gagné!");
-} 
-if (nbKO === 2) {
-    console.log("Vous êtes vaincu. La partie est terminée");
-}
-}
-
-_fight();
-
-export { _fight };
-export { _Character };
+        }
+        if (nbKOenemy === monsters.length) {
+            console.log("L'ennemi est vaincu, vous avez gagné!");
+        } else if (nbKO === 2) {
+            console.log("Vous êtes vaincu. La partie est terminée");
+        }
+        return;
+    }
+}    
