@@ -92,6 +92,7 @@ export function _fight() {
                     let barbare: string | null= "";
                     let prêtre: string | null= "";
                     let voleur: string | null= "";
+                    let dieu: string | null= "";
 
                     if (adventurers[i].classAdventur === guerrier) {
                     console.log("Vous n'avez pas d'attaque spéciale!")
@@ -155,23 +156,36 @@ export function _fight() {
                         thief = Math.floor((Math.random() * 100) + 1);
                         //40% de chances de ne rien voler, 30% d'obtenir une potion, 15% d'obtenir un fragment d'étoile, 10% d'obtenir un éther et  5% d'obtenir une demi-étoile
                         if (thief <= 40) {
-                            console.log("Vous ne volez rien !");
+                            console.log("Vous ne volez rien!");
                         }else if (thief <= 70) {
-                            console.log("Vous avez volé une potion !");
+                            console.log("Vous avez volé une potion!");
                             inventory.push("position");
                         }else if (thief <= 85) {
-                            console.log("Vous avez volé un fragment d'étoile !");
+                            console.log("Vous avez volé un fragment d'étoile!");
                             inventory.push("fragment")
                         }else if (thief <= 95) {
-                            console.log("Vous avez volé un éther !");
+                            console.log("Vous avez volé un éther!");
                             inventory.push("ether")
                         }else if (thief <= 100) {
-                            console.log("Vous avez volé une demi-étoile !");
+                            console.log("Vous avez volé une demi-étoile!");
                             inventory.push("demi-etoile")
                         }
+                    }else if (adventurers[i].classAdventur === dieu) {
+                        console.log("Vous utilisez le rayon de la mort!")
+                        touchingattack = Math.floor((Math.random() * 100) + 1);
+                        if (touchingattack < protagonist.attackPotency) {
+                            console.log("L'attaque touche!");
+                            antagonist.HPCurrent = antagonist.HPCurrent - ((protagonist.physicalAttack - antagonist.physicalDefense)*5);                
+                        }
+                        else {
+                            console.log("Votre attaque échoue!");
+                        }
+                        console.log(`L'ennemi a désormais ${antagonist.HPCurrent}`);
+                        turn = "antagonistturn";
+                        i = 0;
+
                     }
-                }
-            }            
+                }            
         
     
 
