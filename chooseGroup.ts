@@ -35,13 +35,14 @@ export function chooseGroup(): Character[] {
     
 }
 
+
 export function enemyGroup(): Monster[] {
     const chosenMonsters = dungeon.chooseRandomMonsters(3);
+    chosenMonsters.sort((c, d) => d.speed - c.speed);
+
     return chosenMonsters;
     console.log(chosenMonsters);
 }
 export const adventurers: Character[] = chooseGroup();
 
-export const monsters = enemyGroup();
-
-_fight();
+export const monsters: Monster[] = enemyGroup();

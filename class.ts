@@ -13,6 +13,7 @@ export class Character {
     canBeHurt: boolean;
     canBeCured: boolean;
     canBeResurrected: boolean;
+    isKO: boolean;
 
     /**
      * 
@@ -27,7 +28,7 @@ export class Character {
      * @param canBeCured 
      * @param canBeResurrected 
      */
-    constructor(name: string, physicalAttack: number, physicalDefense: number, magicalAttack: number, magicalDefense: number, mana: number, speed: number, HPMax: number, HPCurrent: number, attackPotency: number, canBeHurt: boolean, canBeCured: boolean, canBeResurrected: boolean) {
+    constructor(name: string, physicalAttack: number, physicalDefense: number, magicalAttack: number, magicalDefense: number, mana: number, speed: number, HPMax: number, HPCurrent: number, attackPotency: number, canBeHurt: boolean, canBeCured: boolean, canBeResurrected: boolean, isKO: boolean) {
 
         this.name = name;
         this.physicalAttack = physicalAttack;
@@ -37,12 +38,12 @@ export class Character {
         this.mana = mana;
         this.speed = speed;
         this.HPMax = HPMax;
-        
         this.HPCurrent = HPCurrent;
         this.attackPotency = attackPotency;
         this.canBeHurt = canBeHurt;
         this.canBeCured = canBeCured;
         this.canBeResurrected = canBeResurrected;
+        this.isKO = isKO;
     }
 }
 

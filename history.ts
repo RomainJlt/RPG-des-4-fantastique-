@@ -1,11 +1,11 @@
 import { _fight } from "./fight.ts";
 import { Monster } from "./class.ts";
-import { monsters, dragon } from "./persoMonster.ts";
+import { monster, dragon } from "./persoMonster.ts";
 import { Menu } from "./menu.ts";
-import { _Character } from "./fight.ts";
+import { Character } from "./class.ts";
 
 
-class Dungeon {
+export class Dungeon {
     private randomMonsters: Monster[];
     private boss: Monster[];
 
@@ -33,7 +33,7 @@ class Dungeon {
         await _fight();
     }
 
-    private chooseRandomMonsters(numberOfMonsters: number): Monster[] {
+    public chooseRandomMonsters(numberOfMonsters: number): Monster[] {
         const chosenMonsters: Monster[] = [];
         for(let i = 0; i < numberOfMonsters; i++){
             const randomIndex = Math.floor(Math.random() * this.randomMonsters.length);
@@ -42,36 +42,40 @@ class Dungeon {
         return chosenMonsters;
     }
 
-    private openChest(protagonist: _Character): void {
+    /*private openChest(): void {
         const chestMenu = new Menu("Vous trouvez un coffre! Que voulez-vous faire?", ["Ouvrir le coffre", "Laisser le coffre"]);
         const choicePromise = chestMenu.askUser();
-        choicePromise.then((choice: number) => {
-            if (choice === 1) {
+        choicePromise.then((choice) => {
+            if(choice === 1){
                 const trapProbability = Math.random();
-                if (trapProbability < 0.3) {
+                if(trapProbability < 0.3){
                     console.log("Le coffre était piégé. Vous êtes blessé!");
                     //Dégats du trap sur le personnage
                 } else {
-                    console.log("Vous trouvez les récompenses dans le coffre!");
-                    //Récompense random
-                    const rewards = ["Potion", "Morceau d'étoile", "Demi étoile", "Ether"];
-                    const randomReward = rewards[Math.floor(Math.random() * rewards.length)];
-                    console.log(`Vous trouvez ${randomReward} dans le coffre!`);
-                    //Ajouter la récompense au tableau de string inventaire
-                    protagonist.inventory.push(randomReward);
+                    console.log("Vous trouvez les récompenses dans le coffre!"); //récompense random
+                    //Donner la récompense
                 }
             } else {
-                console.log("Vous décidez de ne pas ouvrir le coffre!");
+                console.log("Vous décidez de ne pas ouvrir le coffre!"); 
             }
         });
     }
-
-    private fightBoss(): void {
-        console.log("Vous entrez dans la salle du Boss...");
-        console.warn(`Un ${this.boss[0].name} apparaît!`);
-        _fight();
-    }
+    */
+    
 }
 
-const dungeon = new Dungeon(monsters, dragon);
-dungeon.explore();
+function openTheChest(): void {
+    const trapProb = Math.random();
+    if(trapProb < 0.3){
+        protagonist.HPCurrent = protagonist.HPCurrent - 10;
+
+    }
+}
+export function fightBoss(): void {
+    console.log("Vous entrez dans la salle du Boss...");
+    console.warn(`Un ${dragon} apparaît!`);
+    _fight();
+}
+
+export const dungeon = new Dungeon(monster, dragon);
+//dungeon.explore();
