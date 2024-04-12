@@ -2,6 +2,8 @@ import { _fight } from "./fight.ts";
 import { Monster } from "./class.ts";
 import { monster, dragon } from "./persoMonster.ts";
 import { Menu } from "./menu.ts";
+import { Character } from "./class.ts";
+
 
 export class Dungeon {
     private randomMonsters: Monster[];
@@ -40,7 +42,7 @@ export class Dungeon {
         return chosenMonsters;
     }
 
-    private openChest(): void {
+    /*private openChest(): void {
         const chestMenu = new Menu("Vous trouvez un coffre! Que voulez-vous faire?", ["Ouvrir le coffre", "Laisser le coffre"]);
         const choicePromise = chestMenu.askUser();
         choicePromise.then((choice) => {
@@ -58,13 +60,22 @@ export class Dungeon {
             }
         });
     }
+    */
+    
+}
 
-    private fightBoss(): void {
-        console.log("Vous entrez dans la salle du Boss...");
-        console.warn(`Un ${this.boss[0].name} apparaît!`);
-        _fight();
+function openTheChest(): void {
+    const trapProb = Math.random();
+    if(trapProb < 0.3){
+        protagonist.HPCurrent = protagonist.HPCurrent - 10;
+
     }
+}
+export function fightBoss(): void {
+    console.log("Vous entrez dans la salle du Boss...");
+    console.warn(`Un ${dragon} apparaît!`);
+    _fight();
 }
 
 export const dungeon = new Dungeon(monster, dragon);
-dungeon.explore();
+//dungeon.explore();
