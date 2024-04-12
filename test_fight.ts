@@ -1,5 +1,7 @@
 import { Character } from "./class.ts";
 import { Menu } from "./menu.ts";
+import { chooseGroup, enemyGroup } from "./chooseGroup.ts";
+import { adventurers, monsters} from "./chooseGroup.ts";
 
 class _Character{
     name: string;
@@ -47,28 +49,29 @@ class _Character{
 const protagonist = new _Character("Théophile Le Luisant", 70, 40, 50, 100, 100, 80, 0, 200, 200, 100, false, false, false);;
 const antagonist   = new _Character("Axel Le Scammer De Mémés Baveuses",  65, 35, 100, 100, 100, 80, 0, 150, 150, 65, false, false, false);;
 
-const fightMenu = new Menu("Que voulez-vous faire?", ["Attaquer", "Se Défendre", "Utiliser un objet", "Quitter"]);
+const fightMenu = new Menu("Que voulez-vous faire?", ["Attaquer", "Se Défendre", "Utiliser un objet", "Voir l'inventaire"]);
 const attackMenu = new Menu("Quelle attaque voulez-vous utiliser?", ["Attaque Physique", "Attaque Magique", "Attaque Spéciale"]);
 const objectMenu = new Menu("Que voulez-vous utiliser comme objet?", ["Potion", "Morceau d'étoile", "Demi étoile", "Ether"]);
 
 async function _fight() {
     let i = 0;
     let j = 0;
+    let protagonist = adventurers[i];
+    let antagonist = monsters[j];
+    let inventory = ["Potion", "Potion", "Morceau d'étoile", "Demi étoile", "Ether"];
+    let nbKO : number = 0; 
+    let nbKOenemy : number = 0;
     let turn: string = "";
     let fmenu: number | null = null;
-    let fobjet: number | null = null;
+    let fobject: number | null = null;
     let whichattack: number | null = null;
     let touchingattack: number = 0;
 
-    while (protagonist.HPCurrent > 0 && antagonist.HPCurrent > 0) {
+    while (nbKO !== 2 || nbKOenemy!== 2) {        
         if (antagonist.speed > protagonist.speed) {
-            antagonist.speedPoint = antagonist.speedPoint + 1;
-        } else {
-            protagonist.speedPoint = protagonist.speedPoint + 1;
-        }
-        if (antagonist.speedPoint > protagonist.speedPoint) {
             turn = "antagonistturn";
-        } else {
+        }
+        else if (protagonist.speed > antagonist.speed) {
             turn = "protagonistturn";
         }
         if (turn === "protagonistturn") {
@@ -141,15 +144,79 @@ async function _fight() {
                     i = 0;
                 }
             } else if (fmenu === 3) {
-                fobjet = await objectMenu.askUser();
-                // Logique pour l'utilisation d'objet...
-            } 
+                fobject = await objectMenu.askUser();
+                if (fobject === 1){
+                    protagonist.HPCurrent = (protagonist.HPCurrent)+ 0.5*(protagonist.HPMax);
+                    if (protagonist.HPCurrent > protagonist.HPMax) {
+                        protagonist.HPCurrent = protagonist.HPMax;
+                    }
+                    let index = inventory.indexOf("Potion");
+                    inventory.splice(index, 1);
+                } else if (fobject === 2){
+                    if (protagonist.HPCurrent === 0) {
+                        protagonist.HPCurrent = protagonist.HPCurrent + 0.2*(protagonist.HPMax);     
+                    }
+                    else {
+                        protagonist.HPCurrent = protagonist.HPCurrent + 0.5*(protagonist.HPMax);
+                    }
+                    let index = inventory.indexOf("Morceau d'étoile");
+                    inventory.splice(index, 1);
+                } else if (fobject === 3){
+                    if (protagonist.HPCurrent === 0) {
+                        protagonist.HPCurrent = protagonist.HPMax;
+                    } 
+                    else {
+                        protagonist.HPCurrent = protagonist.HPMax;
+                    }
+                    let index = inventory.indexOf("Demi étoile");
+                    inventory.splice(index, 1);
+                } else if (fobject === 4){
+                    protagonist.mana = protagonist.mana + 0.3*(protagonist.mana);
+                    let index = inventory.indexOf("Ether");
+                    inventory.splice(index, 1);
+                }
+                i = i + 1;
+                if (i > 2) {
+                    turn = "antagonistturn";
+                    i = 0;
+                }
+            }
+            else if (fmenu === 4){
+                console.log(inventory);
+            }
         }
-
-        // Suite du code de la boucle de combat...
+        if (turn === "antagonistturn") {
+            console.log("C'est au tour de l'ennemi!!");
+            while (j <= 2) {
+                console.log(`${monsters[j].name} attaque!!`);
+            if (fmenu === 2){
+                protagonist.physicalDefense = protagonist.physicalDefense*1.75;
+                    protagonist.magicalDefense = protagonist.magicalDefense*1.75;
+            }
+            let damage = antagonist.physicalAttack - protagonist.physicalDefense;
+                protagonist.HPCurrent -= Math.max(damage, 0); 
+                console.log(`Vous avez désormais ${protagonist.HPCurrent} point de vie!`)
+                j = j + 1;
+                if (j > 2) {
+                    turn = "protagonistturn";
+                }
+            }
+            j = 0;
+    }
+    if (protagonist.HPCurrent <= 0) {
+        nbKO = nbKO + 1;
+    }
+    if (antagonist.HPCurrent <= 0) {
+        nbKOenemy = nbKOenemy + 1;
     }
 
-    // Logique pour la fin du combat...
+}
+if (nbKOenemy === 2) {
+    console.log("L'ennemi est vaincu, vous avez gagné!");
+} 
+if (nbKO === 2) {
+    console.log("Vous êtes vaincu. La partie est terminée");
+}
 }
 
 _fight();
