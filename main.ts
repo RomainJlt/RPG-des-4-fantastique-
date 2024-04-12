@@ -97,6 +97,3 @@ function processing(){
 }
 
 processing();
-
-
-

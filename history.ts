@@ -1,7 +1,7 @@
 import { _fight } from "./fight.ts";
 import { Monster } from "./class.ts";
 import { monster, dragon } from "./persoMonster.ts";
-import { Menu } from "./menu.ts";
+import { } from "./menu.ts";
 import { Character } from "./class.ts";
 
 
@@ -41,26 +41,6 @@ export class Dungeon {
         }
         return chosenMonsters;
     }
-
-    /*private openChest(): void {
-        const chestMenu = new Menu("Vous trouvez un coffre! Que voulez-vous faire?", ["Ouvrir le coffre", "Laisser le coffre"]);
-        const choicePromise = chestMenu.askUser();
-        choicePromise.then((choice) => {
-            if(choice === 1){
-                const trapProbability = Math.random();
-                if(trapProbability < 0.3){
-                    console.log("Le coffre était piégé. Vous êtes blessé!");
-                    //Dégats du trap sur le personnage
-                } else {
-                    console.log("Vous trouvez les récompenses dans le coffre!"); //récompense random
-                    //Donner la récompense
-                }
-            } else {
-                console.log("Vous décidez de ne pas ouvrir le coffre!"); 
-            }
-        });
-    }
-    */
     
 }
 
