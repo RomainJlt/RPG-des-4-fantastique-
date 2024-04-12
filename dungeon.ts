@@ -1,4 +1,5 @@
 import { Character}  from './class.ts'; 
+import { _fight } from './fight.ts';
 import { Monster} from `./persoMonster.ts`;
 
 

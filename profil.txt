@@ -69,7 +69,10 @@ Le voleur aura une défense moyenne ainsi qu'une attaque physique moyenne, mais 
 
 
 
+------------------------------------------------------------------------------------------------
 
+Dieu
+Le Dieu aura une attaque et une défense très élevée et il possèdera un rayon de la mort qui fait 5 fois plus de degat qu'un attaque normal
 
 
 

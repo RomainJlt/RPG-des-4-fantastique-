@@ -82,18 +82,3 @@ export class Monster {
         this.attackPotency = attackPotency;
     }
 }
-/*
-class Fight{
-    protagonist: Character;
-    antagonist: Character;
-}
-
-class GameManager{
-
-}
-
-class Menu{
-    move: string;
-    openAChest: boolean;
-    leave: boolean;
-}*/
