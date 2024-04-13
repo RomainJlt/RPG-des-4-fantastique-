@@ -1,6 +1,7 @@
 import { _fight } from "./fight.ts";
 import {  } from "./history.ts";
 import { adventurers } from "./chooseGroup.ts";
+import { monster } from "./persoMonster.ts";
 import { fightBoss } from "./history.ts";
 
 export function processing(){
