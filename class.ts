@@ -1,5 +1,6 @@
 export class Character {
 
+    classAdventur: string;
     name: string;
     physicalAttack: number;
     physicalDefense: number;
@@ -28,8 +29,9 @@ export class Character {
      * @param canBeCured 
      * @param canBeResurrected 
      */
-    constructor(name: string, physicalAttack: number, physicalDefense: number, magicalAttack: number, magicalDefense: number, mana: number, speed: number, HPMax: number, HPCurrent: number, attackPotency: number, canBeHurt: boolean, canBeCured: boolean, canBeResurrected: boolean, isKO: boolean) {
+    constructor(classAdventur: string, name: string, physicalAttack: number, physicalDefense: number, magicalAttack: number, magicalDefense: number, mana: number, speed: number, HPMax: number, HPCurrent: number, attackPotency: number, canBeHurt: boolean, canBeCured: boolean, canBeResurrected: boolean, isKO: boolean) {
 
+        this.classAdventur = classAdventur;
         this.name = name;
         this.physicalAttack = physicalAttack;
         this.physicalDefense = physicalDefense;
@@ -44,26 +46,6 @@ export class Character {
         this.canBeCured = canBeCured;
         this.canBeResurrected = canBeResurrected;
         this.isKO = isKO;
-    }
-
-
-    ressusciter(amount: number): void {
-        if (this.canBeResurrected && this.isKO) {
-            this.HPCurrent = Math.min(amount, this.HPMax);
-            this.isKO = false;
-            console.log(`${this.name} has been resurrected with ${this.HPCurrent} health.`);
-        } else {
-            console.log(`${this.name} cannot be resurrected.`);
-        }
-    }
-
-    restaurerVie(amount: number): void {
-        if (this.canBeCured && !this.isKO) {
-            this.HPCurrent = Math.min(this.HPCurrent + amount, this.HPMax);
-            console.log(`${this.name} has restored ${amount} health and now has ${this.HPCurrent} health.`);
-        } else {
-            console.log(`${this.name} cannot restore health.`);
-        }
     }
 }
 
@@ -100,18 +82,3 @@ export class Monster {
         this.attackPotency = attackPotency;
     }
 }
-/*
-class Fight{
-    protagonist: Character;
-    antagonist: Character;
-}
-
-class GameManager{
-
-}
-
-class Menu{
-    move: string;
-    openAChest: boolean;
-    leave: boolean;
-}*/

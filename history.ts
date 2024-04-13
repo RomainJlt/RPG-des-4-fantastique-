@@ -1,7 +1,9 @@
 import { _fight } from "./fight.ts";
 import { Monster } from "./class.ts";
 import { monster, dragon } from "./persoMonster.ts";
-import { } from "./menu.ts";
+import { Menu } from "./menu.ts";
+import { Character } from "./class.ts";
+import { adventurers } from "./chooseGroup.ts";
 
 
 export class Dungeon {
@@ -16,10 +18,10 @@ export class Dungeon {
     async explore(): Promise<void>{
         console.log("Vous entrez dans le donjon...");
         await this.exploreRoomWithCombat(3);
-        this.openChest();
+        
         await this.exploreRoomWithCombat(3);
-        this.openChest();
-        this.fightBoss();
+        
+        
     }
 
     private async exploreRoomWithCombat(numberOfMonsters: number): Promise<void> {
@@ -40,16 +42,30 @@ export class Dungeon {
         }
         return chosenMonsters;
     }
+
+    /*private openChest(): void {
+        const chestMenu = new Menu("Vous trouvez un coffre! Que voulez-vous faire?", ["Ouvrir le coffre", "Laisser le coffre"]);
+        const choicePromise = chestMenu.askUser();
+        choicePromise.then((choice) => {
+            if(choice === 1){
+                const trapProbability = Math.random();
+                if(trapProbability < 0.3){
+                    console.log("Le coffre était piégé. Vous êtes blessé!");
+                    //Dégats du trap sur le personnage
+                } else {
+                    console.log("Vous trouvez les récompenses dans le coffre!"); //récompense random
+                    //Donner la récompense
+                }
+            } else {
+                console.log("Vous décidez de ne pas ouvrir le coffre!"); 
+            }
+        });
+    }
+    */
     
 }
 
-function openTheChest(): void {
-    const trapProb = Math.random();
-    if(trapProb < 0.3){
-        protagonist.HPCurrent = protagonist.HPCurrent - 10;
 
-    }
-}
 export function fightBoss(): void {
     console.log("Vous entrez dans la salle du Boss...");
     console.warn(`Un ${dragon} apparaît!`);

@@ -1,1 +1,4 @@
+# Projet RPG POO
 
+## Comment lancer le jeux
+Pour lancer le jeux il faut faire "deno run main.ts" dans le terminal et suivre les instructions.
