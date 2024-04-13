@@ -9,7 +9,7 @@ export function _fight() {
     let nbKO: number = 0;
     let nbKOenemy: number = 0;
     let fmenu: string | null = "";
-    let fobject: string | null = "";
+    let fobjet: string | null = "";
     let whichattack: string | null = "";
     let touchingattack: number = 0;
     let turn: string = "";
@@ -50,53 +50,112 @@ export function _fight() {
                     touchingattack = Math.floor((Math.random() * 100) + 1);
                     if (touchingattack < protagonist.attackPotency) {
                         console.log("L'attaque touche!");
-                        // Loop over all monsters and apply damage to each
-                        monsters.forEach(monster => {
-                            let damage = protagonist.physicalAttack - monster.physicalDefense;
-                            monster.HPCurrent -= Math.max(damage, 0);
-                            if (monster.HPCurrent < 0) {
-                                monster.HPCurrent = 0; // Ensure HP doesn't go negative
-                            }
-                            console.log(`\x1b[31m${monster.name} a désormais ${monster.HPCurrent}\x1b[0m`);
-                        });
+                        let damage = protagonist.physicalAttack - antagonist.physicalDefense;
+                        antagonist.HPCurrent -= Math.max(damage, 0);
+                        if (antagonist.HPCurrent < 0) {
+                            antagonist.HPCurrent = 0; // Ensure HP doesn't go negative
+                        }
                     }
                     else {
                         console.log("Votre attaque échoue!");
                     }
+                    console.log(`\x1b[31mL'ennemi a désormais ${antagonist.HPCurrent}\x1b[0m`);
                     i = i + 1;
                     if (i > 2) {
                         turn = "antagonistturn";
                         i = 0;
                     }
+
                 }
-                // ... handle other attacks
+                if (whichattack === "Attaque Magique") {
+                    console.log("Vous attaquez magiquement!");
+                    touchingattack = Math.floor((Math.random() * 100) + 1);
+                    if (touchingattack < protagonist.attackPotency) {
+                        console.log("L'attaque touche!");
+                        let damage = protagonist.magicalAttack - antagonist.magicalDefense;
+                        antagonist.HPCurrent -= Math.max(damage, 0);
+                        if (antagonist.HPCurrent < 0) {
+                            antagonist.HPCurrent = 0; // Ensure HP doesn't go negative
+                        }
+                        protagonist.mana = protagonist.mana - 10;
+                    }
+                    else {
+                        console.log("Votre attaque échoue!");
+                    }
+                    console.log(`\x1b[31mL'ennemi a désormais ${antagonist.HPCurrent}\x1b[0m`);
+                    i = i + 1;
+                    if (i > 2) {
+                        turn = "antagonistturn";
+                        i = 0;
+                    }
+
+                }
+                if (whichattack === "Attaque Spéciale") {
+                    console.log("Vous utilisez une attaque spéciale!")
+                    touchingattack = Math.floor((Math.random() * 100) + 1);
+                    if (touchingattack < protagonist.attackPotency) {
+                        console.log("L'attaque touche!");
+                        antagonist.HPCurrent = antagonist.HPCurrent - protagonist.physicalAttack + antagonist.physicalDefense;
+                        if (antagonist.physicalDefense > protagonist.physicalAttack) {
+                            antagonist.HPCurrent = antagonist.HPCurrent - 0;
+                        }
+                        if (antagonist.HPCurrent < 0) {
+                            antagonist.HPCurrent = 0; // Ensure HP doesn't go negative
+                        }
+                    }
+                    else {
+                        console.log("Votre attaque échoue!");
+                    }
+                    console.log(`\x1b[31mL'ennemi a désormais ${antagonist.HPCurrent}\x1b[0m`);
+                    i = i + 1;
+                    if (i > 2) {
+                        turn = "antagonistturn";
+                        i = 0;
+                    }
+
+                }
+            }
+            if (fmenu === "Se Défendre") {
+                console.log("Vous vous défendez!")
+                i = i + 1;
+                if (i > 2) {
+                    turn = "antagonistturn";
+                    i = 0;
+                }
             }
             if (fmenu === "Utiliser un objet") {
-                fobject = prompt(`Que voulez vous utiliser comme objet?\n ${inventory.join('\n')}`);
-                if (fobject === "Potion" && inventory.includes("Potion")) {
-                    protagonist.HPCurrent = protagonist.HPCurrent + 0.5 * protagonist.HPMax;
+                fobjet = prompt(`Que voulez vous utiliser comme objet?\n ${inventory.join('\n')}`);
+                if (fobjet === "Potion" && inventory.includes("Potion")) {
+                    protagonist.HPCurrent = (protagonist.HPCurrent) + 0.5 * (protagonist.HPMax);
                     if (protagonist.HPCurrent > protagonist.HPMax) {
                         protagonist.HPCurrent = protagonist.HPMax;
                     }
                     let index = inventory.indexOf("Potion");
                     inventory.splice(index, 1);
-                } else if (fobject === "Morceau d'étoile" && inventory.includes("Morceau d'étoile")) {
-                    protagonist.HPCurrent = protagonist.HPCurrent + 0.5 * protagonist.HPMax;
-                    if (protagonist.HPCurrent > protagonist.HPMax) {
-                        protagonist.HPCurrent = protagonist.HPMax;
-                    }
-                    let index = inventory.indexOf("Morceau d'étoile");
-                    inventory.splice(index, 1);
-                } else if (fobject === "Demi étoile" && inventory.includes("Demi étoile")) {
-                    protagonist.HPCurrent = protagonist.HPMax;
-                    let index = inventory.indexOf("Demi étoile");
-                    inventory.splice(index, 1);
                 }
-            
+                // ... handle other items
             }
-            
+            if (fmenu === "Voir l'inventaire") {
+                console.log(inventory);
+            }
         }
-
+        if (turn === "antagonistturn") {
+            console.log("C'est au tour de l'ennemi!!");
+            while (j <= monsters.length - 1) {
+                console.log(`${monsters[j].name} attaque!!`);
+                if (fmenu === "Se Défendre") {
+                    protagonist.physicalDefense = protagonist.physicalDefense * 1.75;
+                    protagonist.magicalDefense = protagonist.magicalDefense * 1.75;
+                }
+                let damage = antagonist.physicalAttack - protagonist.physicalDefense;
+                protagonist.HPCurrent -= Math.max(damage, 0);
+                if (protagonist.HPCurrent < 0) {
+                    protagonist.HPCurrent = 0; // Ensure HP doesn't go negative
+                }
+                console.log(`\x1b[31mVous avez désormais ${protagonist.HPCurrent} point de vie!\x1b[0m`);
+                j++;
+            }
+        }
         i = (i + 1) % 3;
         j = (j + 1) % monsters.length;
     }
