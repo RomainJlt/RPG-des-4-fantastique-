@@ -1,4 +1,5 @@
 import { adventurers, monsters } from "./chooseGroup.ts";
+im
 
 export function _fight() {
     let i = 0;
@@ -36,7 +37,6 @@ export function _fight() {
                 antagonist = monsters[j];
             }
             console.log(`${antagonist.name} est mort!`);
-            return;
         }
         if (protagonist.HPCurrent <= 0) {
             nbKO = nbKO + 1;
@@ -153,6 +153,14 @@ export function _fight() {
                     protagonist.HPCurrent = 0; // Ensure HP doesn't go negative
                 }
                 console.log(`\x1b[31mVous avez désormais ${protagonist.HPCurrent} point de vie!\x1b[0m`);
+                if (protagonist.HPCurrent <= 0) {
+                    nbKO++;
+                    if (nbKO < adventurers.length) {
+                        i++;
+                        protagonist = adventurers[i];
+                    }
+                    console.log(`${protagonist.name} est mort!`);
+                }
                 j++;
             }
         }
@@ -162,7 +170,7 @@ export function _fight() {
 
     if (nbKOenemy === monsters.length) {
         console.log("L'ennemi est vaincu, vous avez gagné!");
-    } else if (nbKO === 2) {
+    } else if (nbKO === adventurers.length) {
         console.log("Vous êtes vaincu. La partie est terminée");
     }
     return;
