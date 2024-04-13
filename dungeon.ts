@@ -1,5 +1,6 @@
-import { Character}  from './class.ts'; 
-import { Monster} from `./persoMonster.ts`;
+import { Character}  from "./class.ts"; 
+import { Monster} from "./persoMonster.ts";
+
 
 
 // structure of a room in the dungeon
@@ -25,7 +26,7 @@ function exploreDungeon(heroes: Character[]): void {
     if (room.type === 'Combat') { // If the room is a Combat room
       if (room.opponents && room.opponents.length > 0) { // If there are opponents in the room
         const enemies = room.opponents; // Assigning opponents to a variable
-        fight(enemies, heroes); // Initiating a fight with the enemies
+        _fight(enemies, heroes); // Initiating a fight with the enemies
       }
     } else if (room.type === 'Chest') { // If the room is a Chest room
       console.log('You found a chest! Room cleared. Congratulations!');

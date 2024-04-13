@@ -3,6 +3,7 @@ import { Monster } from "./class.ts";
 import { monster, dragon } from "./persoMonster.ts";
 import { Menu } from "./menu.ts";
 import { Character } from "./class.ts";
+import { adventurers } from "./chooseGroup.ts";
 
 
 export class Dungeon {
@@ -17,10 +18,10 @@ export class Dungeon {
     async explore(): Promise<void>{
         console.log("Vous entrez dans le donjon...");
         await this.exploreRoomWithCombat(3);
-        this.openChest();
+        
         await this.exploreRoomWithCombat(3);
-        this.openChest();
-        this.fightBoss();
+        
+        
     }
 
     private async exploreRoomWithCombat(numberOfMonsters: number): Promise<void> {
@@ -64,13 +65,7 @@ export class Dungeon {
     
 }
 
-function openTheChest(): void {
-    const trapProb = Math.random();
-    if(trapProb < 0.3){
-        protagonist.HPCurrent = protagonist.HPCurrent - 10;
 
-    }
-}
 export function fightBoss(): void {
     console.log("Vous entrez dans la salle du Boss...");
     console.warn(`Un ${dragon} apparaît!`);
@@ -79,3 +74,4 @@ export function fightBoss(): void {
 
 export const dungeon = new Dungeon(monster, dragon);
 //dungeon.explore();
+
