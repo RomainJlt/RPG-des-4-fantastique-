@@ -20,10 +20,6 @@ const dieu =        new Character("Julien La Divinité",                 1000, 1
 export const humain : Character[] = [guerrier,mage,paladin,barbare,prêtre,voleur,bucheron,scammer,geek,druide,dieu];
 
 
-
-
-
-
 const zombie = new Monster("Zombie",    10, 10, 10, 10, 50, 50, 5);
 const vampire = new Monster("Vampire",  10, 10, 10, 10, 50, 50, 5);
 const loupGarou = new Monster("Loup-Garou", 10, 10, 10, 10, 50, 50, 5);

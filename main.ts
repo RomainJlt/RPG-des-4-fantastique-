@@ -6,9 +6,4 @@ import { adventurers, monsters } from "./chooseGroup.ts";
 import { fightBoss } from "./history.ts";
 import { processing } from "./process.ts"
 
-
-
-
-
-
 processing();

@@ -45,6 +45,26 @@ export class Character {
         this.canBeResurrected = canBeResurrected;
         this.isKO = isKO;
     }
+
+
+    ressusciter(amount: number): void {
+        if (this.canBeResurrected && this.isKO) {
+            this.HPCurrent = Math.min(amount, this.HPMax);
+            this.isKO = false;
+            console.log(`${this.name} has been resurrected with ${this.HPCurrent} health.`);
+        } else {
+            console.log(`${this.name} cannot be resurrected.`);
+        }
+    }
+
+    restaurerVie(amount: number): void {
+        if (this.canBeCured && !this.isKO) {
+            this.HPCurrent = Math.min(this.HPCurrent + amount, this.HPMax);
+            console.log(`${this.name} has restored ${amount} health and now has ${this.HPCurrent} health.`);
+        } else {
+            console.log(`${this.name} cannot restore health.`);
+        }
+    }
 }
 
 export class Monster {

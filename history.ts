@@ -2,7 +2,6 @@ import { _fight } from "./fight.ts";
 import { Monster } from "./class.ts";
 import { monster, dragon } from "./persoMonster.ts";
 import { } from "./menu.ts";
-import { Character } from "./class.ts";
 
 
 export class Dungeon {

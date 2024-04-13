@@ -1,5 +1,5 @@
-import { Character}  from './class.ts'; 
-import { Monster} from `./persoMonster.ts`;
+import { Character}  from "./class.ts"; 
+import { Monster} from ./persoMonster.ts";
 
 
 // structure of a room in the dungeon
@@ -33,10 +33,3 @@ function exploreDungeon(heroes: Character[]): void {
   }
 }
 
-
-
-
-
-// // Example usage:
-// const heroes: Character[] = [/* Array of hero characters */]; // Array of hero characters
-// exploreDungeon(heroes); // Exploring the dungeon with the array of heroes
