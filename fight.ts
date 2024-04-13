@@ -9,7 +9,7 @@ export function _fight() {
     let nbKO: number = 0;
     let nbKOenemy: number = 0;
     let fmenu: string | null = "";
-    let fobjet: string | null = "";
+    let fobject: string | null = "";
     let whichattack: string | null = "";
     let touchingattack: number = 0;
     let turn: string = "";
@@ -69,11 +69,33 @@ export function _fight() {
                         i = 0;
                     }
                 }
-                
+                // ... handle other attacks
+            }
+            if (fmenu === "Utiliser un objet") {
+                fobject = prompt(`Que voulez vous utiliser comme objet?\n ${inventory.join('\n')}`);
+                if (fobject === "Potion" && inventory.includes("Potion")) {
+                    protagonist.HPCurrent = protagonist.HPCurrent + 0.5 * protagonist.HPMax;
+                    if (protagonist.HPCurrent > protagonist.HPMax) {
+                        protagonist.HPCurrent = protagonist.HPMax;
+                    }
+                    let index = inventory.indexOf("Potion");
+                    inventory.splice(index, 1);
+                } else if (fobject === "Morceau d'étoile" && inventory.includes("Morceau d'étoile")) {
+                    protagonist.HPCurrent = protagonist.HPCurrent + 0.5 * protagonist.HPMax;
+                    if (protagonist.HPCurrent > protagonist.HPMax) {
+                        protagonist.HPCurrent = protagonist.HPMax;
+                    }
+                    let index = inventory.indexOf("Morceau d'étoile");
+                    inventory.splice(index, 1);
+                } else if (fobject === "Demi étoile" && inventory.includes("Demi étoile")) {
+                    protagonist.HPCurrent = protagonist.HPMax;
+                    let index = inventory.indexOf("Demi étoile");
+                    inventory.splice(index, 1);
+                }
+            
             }
             
         }
-       
 
         i = (i + 1) % 3;
         j = (j + 1) % monsters.length;
