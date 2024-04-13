@@ -8,11 +8,11 @@ export function processing(){
     let l = 1;
     let object = ["Potion", "Morceau d'étoile", "Demi étoile", "Ether"];
     let inventory = ["Potion", "Potion", "Morceau d'étoile", "Demi étoile", "Ether"];
-    let map = ["[ ]\n [ ]\n [ ]\n [ ]\n [ ]"];
+    let map = "[ ]\n [ ]\n [ ]\n [ ]\n [ ]";
     console.log("Vous entrez dans le donjon...");
     console.log(`Vous êtes dans la salle ${l}.`);
     if (l === 1) {
-        map = ["[ ]\n [ ]\n [ ]\n [ ]\n [*]"];
+        map = "[ ]\n [ ]\n [ ]\n [ ]\n [*]";
     }
     let userchoicem1 = prompt("Voulez vous voir la carte?\n Oui\n Non");
     if (userchoicem1 === "Oui") {
@@ -46,7 +46,7 @@ export function processing(){
     }
     console.log(`Vous êtes dans la salle ${l}!`);
     if (l === 2) {
-        map = ["[ ]\n [ ]\n [ ]\n [*]\n [ ]"];
+        map = "[ ]\n [ ]\n [ ]\n [*]\n [ ]";
     }
     let userchoicem2 = prompt("Voulez vous voir la carte?\n Oui\n Non");
     if (userchoicem2 === "Oui") {
@@ -66,7 +66,7 @@ export function processing(){
     console.log(`Vous passez à la salle ${l}!`);
     console.log(`Vous êtes dans la salle ${l}!`);
     if (l === 3) {
-        map = ["[ ]\n [ ]\n [*]\n [ ]\n [ ]"];
+        map = "[ ]\n [ ]\n [*]\n [ ]\n [ ]";
     }
     let userchoicem3 = prompt("Voulez vous voir la carte?\n Oui\n Non");
     if (userchoicem3 === "Oui") {
@@ -86,7 +86,7 @@ export function processing(){
     console.log(`Vous passez à la salle ${l}!`);
     console.log(`Vous êtes dans la salle ${l}!`);
     if (l === 4) {
-        map = ["[ ]\n [*]\n [ ]\n [ ]\n [ ]"];
+        map = "[ ]\n [*]\n [ ]\n [ ]\n [ ]";
     }
     let userchoicem4 = prompt("Voulez vous voir la carte?\n Oui\n Non");
     if (userchoicem4 === "Oui") {
@@ -120,7 +120,7 @@ export function processing(){
     }
     console.log(`Vous êtes dans la salle ${l}!`);
     if (l === 5) {
-        map = ["[*]\n [ ]\n [ ]\n [ ]\n [ ]"];
+        map = "[*]\n [ ]\n [ ]\n [ ]\n [ ]";
     }
     let userchoicem5 = prompt("Voulez vous voir la carte?\n Oui\n Non");
     if (userchoicem5 === "Oui") {
