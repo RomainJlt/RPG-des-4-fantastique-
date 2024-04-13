@@ -21,7 +21,6 @@
 <ref refid="be683313-f996-11ee-ac83-b4b5b678d36e"/>
 <ref refid="c16c22b7-f996-11ee-953e-b4b5b678d36e"/>
 <ref refid="c6f33032-f996-11ee-9b20-b4b5b678d36e"/>
-<ref refid="cdab5180-f998-11ee-b31d-b4b5b678d36e"/>
 </reflist>
 </ownedType>
 </Package>
@@ -39,7 +38,6 @@
 <ref refid="16627950-f8a3-11ee-abf7-b4b5b678d36e"/>
 <ref refid="1a8da549-f8a3-11ee-96d4-b4b5b678d36e"/>
 <ref refid="9f5e146a-f8a6-11ee-ac00-b4b5b678d36e"/>
-<ref refid="cdb0a63b-f998-11ee-af78-b4b5b678d36e"/>
 <ref refid="ac1e549e-f996-11ee-a680-b4b5b678d36e"/>
 <ref refid="bd088e4b-f996-11ee-a338-b4b5b678d36e"/>
 <ref refid="c013f5b2-f996-11ee-aaec-b4b5b678d36e"/>
@@ -919,39 +917,6 @@
 <ref refid="127d81db-f8a3-11ee-95f8-b4b5b678d36e"/>
 </type>
 </Property>
-<Class id="cdab5180-f998-11ee-b31d-b4b5b678d36e">
-<name>
-<val>Process</val>
-</name>
-<package>
-<ref refid="58d6c2e8-66f8-11ec-b4c8-0456e5e540ed"/>
-</package>
-<presentation>
-<reflist>
-<ref refid="cdb0a63b-f998-11ee-af78-b4b5b678d36e"/>
-</reflist>
-</presentation>
-</Class>
-<ClassItem id="cdb0a63b-f998-11ee-af78-b4b5b678d36e">
-<matrix>
-<val>(1.0, 0.0, 0.0, 1.0, 1106.0, 18.434628044850456)</val>
-</matrix>
-<top-left>
-<val>(0.0, 0.0)</val>
-</top-left>
-<width>
-<val>100.0</val>
-</width>
-<height>
-<val>57.0</val>
-</height>
-<diagram>
-<ref refid="58d6c536-66f8-11ec-b4c8-0456e5e540ed"/>
-</diagram>
-<subject>
-<ref refid="cdab5180-f998-11ee-b31d-b4b5b678d36e"/>
-</subject>
-</ClassItem>
 <Operation id="5e2ed5cb-f9a7-11ee-9e64-b4b5b678d36e">
 <class_>
 <ref refid="127d81db-f8a3-11ee-95f8-b4b5b678d36e"/>
