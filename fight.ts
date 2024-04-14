@@ -119,6 +119,10 @@ export async function _fight() {
                     if (touchingattack < protagonist.attackPotency) {
                         console.log("L'attaque touche!");
                         let damage = antagonist.HPCurrent - ((protagonist.physicalAttack - antagonist.physicalDefense)*0.4);
+                        antagonist.HPCurrent -= Math.max(damage, 0);
+                        if (antagonist.HPCurrent < 0) {
+                            antagonist.HPCurrent = 0; // Ensure HP doesn't go negative
+                        }
                     } else {
                         console.log("Votre attaque échoue!");
                     }
@@ -132,10 +136,16 @@ export async function _fight() {
                     touchingattack = Math.floor((Math.random() * 100) + 1);
                     if (touchingattack < protagonist.attackPotency) {
                         console.log("L'attaque touche!");
-                            antagonist.HPCurrent = antagonist.HPCurrent - ((protagonist.physicalAttack - antagonist.physicalDefense)*1.3);
-                            protagonist.HPCurrent= protagonist.HPCurrent - 20;                   
-                        }
-                    else {
+                        //dégat contre le monstre de 130% de l'attaque physique
+                        let damage = antagonist.HPCurrent - ((protagonist.physicalAttack - antagonist.physicalDefense)*1.3);
+                        //dégat contre le personnage de 20% de ses points de vie
+                        let domageperso = protagonist.HPCurrent - 20;
+                        protagonist.HPCurrent -= Math.max(damage, 0);
+                        antagonist.HPCurrent -= Math.max(domageperso, 0);
+                        if (antagonist.HPCurrent < 0) {
+                            antagonist.HPCurrent = 0;
+                        }                   
+                    }else {
                         console.log("Votre attaque échoue!");
                     }
                     console.log(`L'ennemi a désormais ${antagonist.HPCurrent}`);
@@ -147,16 +157,16 @@ export async function _fight() {
                 } else if (adventurers[i].classAdventur === prêtre) {
                     let soin: string | null= "";
                     console.log("Vous utilisez une action de soin!")
-                    soin = prompt("Restaurer 25% de point de vie à un aventurier( ${adventurers[i].name} , ${adventurers[i+1].name} ou $    {adventurers[i+2].name}")
+                    soin = prompt(`Restaurer 25% de point de vie à un aventurier( ${adventurers[i].name} , ${adventurers[i+1].name} ou ${adventurers[i+2].name}`)
                     if (soin === adventurers[i].name){
-                        console.log("Vous restaurer 25% de point de vie à ${adventurers[i].name})!")
-                        protagonist.HPCurrent= protagonist.HPCurrent - (100/4);
+                        console.log(`Vous restaurer 25% de point de vie à ${adventurers[i].name}!`)
+                        protagonist.HPCurrent= protagonist.HPCurrent + (100/4);
                     } else if (soin === adventurers[i+1].name) {
-                        console.log("Vous restaurer 25% de point de vie à ${adventurers[i+1].name})!")
-                        protagonist.HPCurrent= protagonist.HPCurrent - (100/4);
+                        console.log(`Vous restaurer 25% de point de vie à ${adventurers[i+1].name}!`)
+                        protagonist.HPCurrent= protagonist.HPCurrent + (100/4);
                     } else if (soin === adventurers[i+2].name){
-                        console.log("Vous restaurer 25% de point de vie à ${adventurers[i+2].name})!")
-                        protagonist.HPCurrent= protagonist.HPCurrent - (100/4); 
+                        console.log(`Vous restaurer 25% de point de vie à ${adventurers[i+2].name}!`)
+                        protagonist.HPCurrent= protagonist.HPCurrent + (100/4); 
                     }
                 
                 
@@ -188,9 +198,12 @@ export async function _fight() {
                     touchingattack = Math.floor((Math.random() * 100) + 1);
                     if (touchingattack < protagonist.attackPotency) {
                         console.log("L'attaque touche!");
-                        antagonist.HPCurrent = antagonist.HPCurrent - ((protagonist.physicalAttack - antagonist.physicalDefense)*5);                
-                    }
-                    else {
+                        let damage = antagonist.HPCurrent - ((protagonist.physicalAttack - antagonist.physicalDefense)*5);  
+                        antagonist.HPCurrent -= Math.max(damage, 0);              
+                        if (antagonist.HPCurrent < 0) {
+                            antagonist.HPCurrent = 0;
+                        } 
+                    } else               
                         console.log("Votre attaque échoue!");
                     }
                     console.log(`L'ennemi a désormais ${antagonist.HPCurrent}`);
