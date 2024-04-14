@@ -1,8 +1,7 @@
 import { Character } from "./class.ts";
 import { Monster } from "./class.ts"
 
-
-// Name, physicalAttack, physicalDefense ,speed, HPMax, HPCurrent, attackPotency, canBeHurt, canBeCured, canBeResurrected 
+ 
 const guerrier =    new Character("gerrier", "Garek le Guerroyeur",       40, 70, 0, 0, 0, 50, 100, 100, 80, false, false, false, false);
 const mage =        new Character("mage", "Merlin l'Enchanteur",          10, 10, 50, 30, 100, 50, 100, 100, 80, false, false, false, false);
 const paladin =     new Character("paladin", "Paladin Valérian",          30, 75, 20, 50, 100, 60, 100, 100, 80, false, false, false, false);
