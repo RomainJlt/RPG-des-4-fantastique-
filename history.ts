@@ -76,5 +76,6 @@ export function fightBoss(): void {
     _fight();
 }
 
+// Création d'une instance de Dungeon avec des monstres aléatoires et un boss spécifique
 export const dungeon = new Dungeon(monster, dragon);
 //dungeon.explore();
