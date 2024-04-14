@@ -1,7 +1,8 @@
 import { adventurers, monsters } from "./chooseGroup.ts";
 import { monster } from "./persoMonster.ts";
+import { Menu } from "./menu.ts";
 
-export function _fight() {
+export async function _fight() {
     let i = 0;
     let j = 0;
     let protagonist = adventurers[i];
@@ -9,11 +10,16 @@ export function _fight() {
     let inventory = ["Potion", "Potion", "Morceau d'étoile", "Demi étoile", "Ether"];
     let nbKO: number = 0;
     let nbKOenemy: number = 0;
-    let fmenu: string | null = "";
-    let fobjet: string | null = "";
-    let whichattack: string | null = "";
+    let fmenu: number | null = null;
+    let fobject: number | null = null;
+    let whichattack: number | null = null;
     let touchingattack: number = 0;
     let turn: string = "";
+
+    const fightMenu = new Menu(`Que voulez vous faire en tant que ${adventurers[i].name}?`, ["Attaquer", "Se Défendre", "Utiliser un objet", "Voir l'inventaire"]);
+    const attackMenu = new Menu("Quelle attaque voulez-vous utiliser?", ["Attaque Physique", "Attaque Magique", "Attaque Spéciale"]);
+    const objectMenu = new Menu("Que voulez-vous utiliser comme objet?", ["Potion", "Morceau d'étoile", "Demi étoile", "Ether"]);
+
     antagonist.HPCurrent = antagonist.HPMax;
     // Display HP of each adventurer and monster after sorting
     console.log("Aventuriers et leurs HP:");
@@ -26,8 +32,7 @@ export function _fight() {
         console.log(`\x1b[31mHP de ${antagonist.name}: ${antagonist.HPCurrent}\x1b[0m`);
         if (antagonist.speed > protagonist.speed) {
             turn = "antagonistturn";
-        }
-        else if (protagonist.speed > antagonist.speed) {
+        } else if (protagonist.speed > antagonist.speed) {
             turn = "protagonistturn";
         }
         if (antagonist.HPCurrent <= 0) {
@@ -40,13 +45,13 @@ export function _fight() {
             return;
         }
         if (protagonist.HPCurrent <= 0) {
-            nbKO = nbKO + 1;
+            nbKO++;
         }
         if (turn === "protagonistturn") {
-            fmenu = prompt(`Que voulez vous faire en tant que ${adventurers[i].name}?\n Attaquer\n Se Défendre\n Utiliser un objet\n Voir l'inventaire`);
-            if (fmenu === "Attaquer") {
-                whichattack = prompt("Quelle attaque voulez-vous utiliser?\n Attaque Physique\n Attaque Magique\n Attaque Spéciale");
-                if (whichattack === "Attaque Physique") {
+            fmenu = await fightMenu.askUser();
+            if (fmenu === 1) {
+                whichattack = await attackMenu.askUser();
+                if (whichattack === 1) {
                     console.log("Vous attaquez physiquement!");
                     touchingattack = Math.floor((Math.random() * 100) + 1);
                     if (touchingattack < protagonist.attackPotency) {
@@ -56,8 +61,7 @@ export function _fight() {
                         if (antagonist.HPCurrent < 0) {
                             antagonist.HPCurrent = 0; // Ensure HP doesn't go negative
                         }
-                    }
-                    else {
+                    } else {
                         console.log("Votre attaque échoue!");
                     }
                     console.log(`\x1b[31mL'ennemi a désormais ${antagonist.HPCurrent}\x1b[0m`);
@@ -66,69 +70,55 @@ export function _fight() {
                         turn = "antagonistturn";
                         i = 0;
                     }
-
                 }
-                if (whichattack === "Attaque Magique") {
-                    console.log("Vous attaquez magiquement!");
+            } else if (whichattack === 2) {
+                console.log("Vous attaquez magiquement!");
+                touchingattack = Math.floor((Math.random() * 100) + 1);
+                if (touchingattack < protagonist.attackPotency) {
+                    console.log("L'attaque touche!");
+                    let damage = protagonist.magicalAttack - antagonist.magicalDefense;
+                    antagonist.HPCurrent -= Math.max(damage, 0);
+                    protagonist.mana = protagonist.mana - 10;
+                } else {
+                    console.log("Votre attaque échoue!");
+                }
+                console.log(`\x1b[31mL'ennemi a désormais ${antagonist.HPCurrent}\x1b[0m`);
+                turn = "antagonistturn";
+                i = i + 1;
+                if (i > 2) {
+                    turn = "antagonistturn";
+                    i = 0;
+                }
+            } else if (whichattack === 3) {
+                let guerrier: string | null= "";
+                let mage: string | null= "";
+                let paladin: string | null= "";
+                let barbare: string | null= "";
+                let prêtre: string | null= "";
+                let voleur: string | null= "";
+                let dieu: string | null= "";
+
+                if (adventurers[i].classAdventur === guerrier) {
+                    console.log("Vous n'avez pas d'attaque spéciale!");
+                } else if (adventurers[i].classAdventur === mage) {
+                    console.log("Vous n'avez pas d'attaque spéciale!");
+                } else if (adventurers[i].classAdventur === paladin) {
+                    console.log("Vous utilisez une attaque spéciale sainte!");
                     touchingattack = Math.floor((Math.random() * 100) + 1);
                     if (touchingattack < protagonist.attackPotency) {
                         console.log("L'attaque touche!");
-                        let damage = protagonist.magicalAttack - antagonist.magicalDefense;
-                        antagonist.HPCurrent -= Math.max(damage, 0);
-                        if (antagonist.HPCurrent < 0) {
-                            antagonist.HPCurrent = 0; // Ensure HP doesn't go negative
-                        }
-                        protagonist.mana = protagonist.mana - 10;
-                    }
-                    else {
+                        let damage = antagonist.HPCurrent - ((protagonist.physicalAttack - antagonist.physicalDefense)*0.4);
+                    } else {
                         console.log("Votre attaque échoue!");
                     }
-                    console.log(`\x1b[31mL'ennemi a désormais ${antagonist.HPCurrent}\x1b[0m`);
-                    i = i + 1;
-                    if (i > 2) {
-                        turn = "antagonistturn";
-                        i = 0;
-                    }
-
-                }
-                if (whichattack === "Attaque Spéciale") {
-                    let guerrier: string | null= "";
-                    let mage: string | null= "";
-                    let paladin: string | null= "";
-                    let barbare: string | null= "";
-                    let prêtre: string | null= "";
-                    let voleur: string | null= "";
-                    let dieu: string | null= "";
-
-                    if (adventurers[i].classAdventur === guerrier) {
-                    console.log("Vous n'avez pas d'attaque spéciale!")
-                
-
-                    } else if (adventurers[i].classAdventur === mage) {
-                        console.log("Vous n'avez pas d'attaque spéciale!")
-
-
-                    } else if (adventurers[i].classAdventur === paladin) {
-                        console.log("Vous utilisez une attaque spéciale sainte!")
-                        touchingattack = Math.floor((Math.random() * 100) + 1);
-                        if (touchingattack < protagonist.attackPotency) {
-                            console.log("L'attaque touche!");
-                            antagonist.HPCurrent = antagonist.HPCurrent - ((protagonist.physicalAttack - antagonist.physicalDefense)*0.4);                      
-                        }
-                        else {
-                            console.log("Votre attaque échoue!");
-                        }
-                        console.log(`L'ennemi a désormais ${antagonist.HPCurrent}`);
-                        turn = "antagonistturn";
-
-
-
-
-                    } else if (adventurers[i].classAdventur === barbare) {
-                        console.log("Vous utilisez une attaque spéciale Berserk!")
-                        touchingattack = Math.floor((Math.random() * 100) + 1);
-                        if (touchingattack < protagonist.attackPotency) {
-                            console.log("L'attaque touche!");
+                    console.log(`L'ennemi a désormais ${antagonist.HPCurrent}`);
+                    turn = "antagonistturn";
+                    i = 0;
+                } else if (adventurers[i].classAdventur === barbare) {
+                    console.log("Vous utilisez une attaque spéciale Berserk!");
+                    touchingattack = Math.floor((Math.random() * 100) + 1);
+                    if (touchingattack < protagonist.attackPotency) {
+                        console.log("L'attaque touche!");
                             antagonist.HPCurrent = antagonist.HPCurrent - ((protagonist.physicalAttack - antagonist.physicalDefense)*1.3);
                             protagonist.HPCurrent= protagonist.HPCurrent - 20;                   
                         }
@@ -191,20 +181,16 @@ export function _fight() {
                         i = 0;
 
                     }
-
-                }
-            }
-            if (fmenu === "Se Défendre") {
-                console.log("Vous vous défendez!")
+            } else if (fmenu === 2) {
+                console.log("Vous vous défendez!");
                 i = i + 1;
                 if (i > 2) {
                     turn = "antagonistturn";
                     i = 0;
                 }
-            }
-            if (fmenu === "Utiliser un objet") {
-                fobjet = prompt(`Que voulez vous utiliser comme objet?\n ${inventory.join('\n')}`);
-                if (fobjet === "Potion" && inventory.includes("Potion")) {
+            } else if (fmenu === 3) {
+            fobject = await objectMenu.askUser();
+            if (fobject === 1 && inventory.includes("Potion")) {
                     protagonist.HPCurrent = (protagonist.HPCurrent) + 0.5 * (protagonist.HPMax);
                     if (protagonist.HPCurrent > protagonist.HPMax) {
                         protagonist.HPCurrent = protagonist.HPMax;
@@ -214,7 +200,7 @@ export function _fight() {
                 }
                 // ... handle other items
             }
-            if (fmenu === "Voir l'inventaire") {
+            if (fmenu === 4) {
                 console.log(inventory);
             }
         }
@@ -222,7 +208,7 @@ export function _fight() {
             console.log("C'est au tour de l'ennemi!!");
             while (j <= monsters.length - 1) {
                 console.log(`${monsters[j].name} attaque!!`);
-                if (fmenu === "Se Défendre") {
+                if (fmenu === 2) {
                     protagonist.physicalDefense = protagonist.physicalDefense * 1.75;
                     protagonist.magicalDefense = protagonist.magicalDefense * 1.75;
                 }
