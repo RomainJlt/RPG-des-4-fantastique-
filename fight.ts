@@ -72,31 +72,35 @@ export async function _fight() {
                     }
                 }
             } else if (whichattack === 2) {
-                console.log("Vous attaquez magiquement!");
-                touchingattack = Math.floor((Math.random() * 100) + 1);
-                if (touchingattack < protagonist.attackPotency) {
-                    console.log("L'attaque touche!");
-                    let damage = protagonist.magicalAttack - antagonist.magicalDefense;
-                    antagonist.HPCurrent -= Math.max(damage, 0);
-                    protagonist.mana = protagonist.mana - 10;
-                } else {
-                    console.log("Votre attaque échoue!");
-                }
-                console.log(`\x1b[31mL'ennemi a désormais ${antagonist.HPCurrent}\x1b[0m`);
-                turn = "antagonistturn";
-                i = i + 1;
-                if (i > 2) {
-                    turn = "antagonistturn";
-                    i = 0;
-                }
-            } else if (whichattack === 3) {
-                let guerrier: string | null= "";
-                let mage: string | null= "";
-                let paladin: string | null= "";
-                let barbare: string | null= "";
-                let prêtre: string | null= "";
-                let voleur: string | null= "";
-                let dieu: string | null= "";
+                    console.log("Vous attaquez magiquement!");
+                    touchingattack = Math.floor((Math.random() * 100) + 1);
+                    if (touchingattack < protagonist.attackPotency) {
+                        console.log("L'attaque touche!");
+                        let damage = protagonist.magicalAttack - antagonist.magicalDefense;
+                        antagonist.HPCurrent -= Math.max(damage, 0);
+                        if (antagonist.HPCurrent < 0) {
+                            antagonist.HPCurrent = 0; // Ensure HP doesn't go negative
+                        }
+                        protagonist.mana = protagonist.mana - 10;
+                    }
+                    else {
+                        console.log("Votre attaque échoue!");
+                    }
+                    console.log(`\x1b[31mL'ennemi a désormais ${antagonist.HPCurrent}\x1b[0m`);
+                    i = i + 1;
+                    if (i > 2) {
+                        turn = "antagonistturn";
+                        i = 0;
+                    }
+                } else if (whichattack === 3) {
+
+                    let guerrier: string | null= "";
+                    let mage: string | null= "";
+                    let paladin: string | null= "";
+                    let barbare: string | null= "";
+                    let prêtre: string | null= "";
+                    let voleur: string | null= "";
+                    let dieu: string | null= "";
 
                 if (adventurers[i].classAdventur === guerrier) {
                     console.log("Vous n'avez pas d'attaque spéciale!");
