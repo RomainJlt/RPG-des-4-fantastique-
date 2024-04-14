@@ -36,7 +36,7 @@ export function _fight() {
                 j++;
                 antagonist = monsters[j];
             }
-            console.log(`${antagonist.name} est mort!`);
+            
             return;
         }
         if (protagonist.HPCurrent <= 0) {
@@ -92,13 +92,13 @@ export function _fight() {
 
                 }
                 if (whichattack === "Attaque Spéciale") {
-                    let guerrier: string | null= "";
-                    let mage: string | null= "";
-                    let paladin: string | null= "";
-                    let barbare: string | null= "";
-                    let prêtre: string | null= "";
-                    let voleur: string | null= "";
-                    let dieu: string | null= "";
+                    let guerrier: string | null= "guerrier";
+                    let mage: string | null= "mage";
+                    let paladin: string | null= "paladin";
+                    let barbare: string | null= "barbare";
+                    let prêtre: string | null= "prêtre";
+                    let voleur: string | null= "voleur";
+                    let dieu: string | null= "dieu";
 
                     if (adventurers[i].classAdventur === guerrier) {
                     console.log("Vous n'avez pas d'attaque spéciale!")
@@ -212,7 +212,7 @@ export function _fight() {
                     let index = inventory.indexOf("Potion");
                     inventory.splice(index, 1);
                 }
-                // ... handle other items
+                
             }
             if (fmenu === "Voir l'inventaire") {
                 console.log(inventory);
