@@ -92,20 +92,27 @@ export async function _fight() {
                         turn = "antagonistturn";
                         i = 0;
                     }
+
+                    //Attaque spécial
                 } else if (whichattack === 3) {
 
-                    let guerrier: string | null= "";
-                    let mage: string | null= "";
-                    let paladin: string | null= "";
-                    let barbare: string | null= "";
-                    let prêtre: string | null= "";
-                    let voleur: string | null= "";
-                    let dieu: string | null= "";
+                    let guerrier: string | null= "guerrier";
+                    let mage: string | null= "mage";
+                    let paladin: string | null= "paladin";
+                    let barbare: string | null= "barbare";
+                    let prêtre: string | null= "prêtre";
+                    let voleur: string | null= "voleur";
+                    let dieu: string | null= "dieu";
 
+                    //Attaque spécial du guerrier
                 if (adventurers[i].classAdventur === guerrier) {
                     console.log("Vous n'avez pas d'attaque spéciale!");
+
+                    //Attaque spécial du mage
                 } else if (adventurers[i].classAdventur === mage) {
                     console.log("Vous n'avez pas d'attaque spéciale!");
+
+                    //Attaque spécial du paladin
                 } else if (adventurers[i].classAdventur === paladin) {
                     console.log("Vous utilisez une attaque spéciale sainte!");
                     touchingattack = Math.floor((Math.random() * 100) + 1);
@@ -118,6 +125,8 @@ export async function _fight() {
                     console.log(`L'ennemi a désormais ${antagonist.HPCurrent}`);
                     turn = "antagonistturn";
                     i = 0;
+
+                    //Attaque spécial du barbare
                 } else if (adventurers[i].classAdventur === barbare) {
                     console.log("Vous utilisez une attaque spéciale Berserk!");
                     touchingattack = Math.floor((Math.random() * 100) + 1);
@@ -126,65 +135,69 @@ export async function _fight() {
                             antagonist.HPCurrent = antagonist.HPCurrent - ((protagonist.physicalAttack - antagonist.physicalDefense)*1.3);
                             protagonist.HPCurrent= protagonist.HPCurrent - 20;                   
                         }
-                        else {
-                            console.log("Votre attaque échoue!");
-                        }
-                        console.log(`L'ennemi a désormais ${antagonist.HPCurrent}`);
-                        console.log(`Vous avez désormais ${protagonist.HPCurrent}`);
-                        turn = "antagonistturn";
-                        i = 0;
-                    } else if (adventurers[i].classAdventur === prêtre) {
-                        let soin: string | null= "";
-                        console.log("Vous utilisez une action de soin!")
-                        soin = prompt("Restaurer 25% de point de vie à un aventurier( ${adventurers[i].name} , ${adventurers[i+1].name} ou $    {adventurers[i+2].name}")
-                        if (soin === adventurers[i].name){
-                            console.log("Vous restaurer 25% de point de vie à ${adventurers[i].name})!")
-                            protagonist.HPCurrent= protagonist.HPCurrent - (100/4);
-                        } else if (soin === adventurers[i+1].name) {
-                            console.log("Vous restaurer 25% de point de vie à ${adventurers[i+1].name})!")
-                            protagonist.HPCurrent= protagonist.HPCurrent - (100/4);
-                        } else if (soin === adventurers[i+2].name){
-                            console.log("Vous restaurer 25% de point de vie à ${adventurers[i+2].name})!")
-                            protagonist.HPCurrent= protagonist.HPCurrent - (100/4); 
-                        }
-                    
-                    
-
-                    } else if (adventurers[i].classAdventur === voleur) {
-                        console.log("Vous volez un objet dans un coin de la pièce.");
-                        let thief: number = 0;
-                        thief = Math.floor((Math.random() * 100) + 1);
-                        //40% de chances de ne rien voler, 30% d'obtenir une potion, 15% d'obtenir un fragment d'étoile, 10% d'obtenir un éther et  5% d'obtenir une demi-étoile
-                        if (thief <= 40) {
-                            console.log("Vous ne volez rien!");
-                        }else if (thief <= 70) {
-                            console.log("Vous avez volé une potion!");
-                            inventory.push("position");
-                        }else if (thief <= 85) {
-                            console.log("Vous avez volé un fragment d'étoile!");
-                            inventory.push("fragment")
-                        }else if (thief <= 95) {
-                            console.log("Vous avez volé un éther!");
-                            inventory.push("ether")
-                        }else if (thief <= 100) {
-                            console.log("Vous avez volé une demi-étoile!");
-                            inventory.push("demi-etoile")
-                        }
-                    }else if (adventurers[i].classAdventur === dieu) {
-                        console.log("Vous utilisez le rayon de la mort!")
-                        touchingattack = Math.floor((Math.random() * 100) + 1);
-                        if (touchingattack < protagonist.attackPotency) {
-                            console.log("L'attaque touche!");
-                            antagonist.HPCurrent = antagonist.HPCurrent - ((protagonist.physicalAttack - antagonist.physicalDefense)*5);                
-                        }
-                        else {
-                            console.log("Votre attaque échoue!");
-                        }
-                        console.log(`L'ennemi a désormais ${antagonist.HPCurrent}`);
-                        turn = "antagonistturn";
-                        i = 0;
-
+                    else {
+                        console.log("Votre attaque échoue!");
                     }
+                    console.log(`L'ennemi a désormais ${antagonist.HPCurrent}`);
+                    console.log(`Vous avez désormais ${protagonist.HPCurrent}`);
+                    turn = "antagonistturn";
+                    i = 0;
+
+                    //Attaque spécial du prêtre
+                } else if (adventurers[i].classAdventur === prêtre) {
+                    let soin: string | null= "";
+                    console.log("Vous utilisez une action de soin!")
+                    soin = prompt("Restaurer 25% de point de vie à un aventurier( ${adventurers[i].name} , ${adventurers[i+1].name} ou $    {adventurers[i+2].name}")
+                    if (soin === adventurers[i].name){
+                        console.log("Vous restaurer 25% de point de vie à ${adventurers[i].name})!")
+                        protagonist.HPCurrent= protagonist.HPCurrent - (100/4);
+                    } else if (soin === adventurers[i+1].name) {
+                        console.log("Vous restaurer 25% de point de vie à ${adventurers[i+1].name})!")
+                        protagonist.HPCurrent= protagonist.HPCurrent - (100/4);
+                    } else if (soin === adventurers[i+2].name){
+                        console.log("Vous restaurer 25% de point de vie à ${adventurers[i+2].name})!")
+                        protagonist.HPCurrent= protagonist.HPCurrent - (100/4); 
+                    }
+                
+                
+                    //Attaque spécial du voleur
+                } else if (adventurers[i].classAdventur === voleur) {
+                    console.log("Vous volez un objet dans un coin de la pièce.");
+                    let thief: number = 0;
+                    thief = Math.floor((Math.random() * 100) + 1);
+                    //40% de chances de ne rien voler, 30% d'obtenir une potion, 15% d'obtenir un fragment d'étoile, 10% d'obtenir un éther et  5% d'obtenir une demi-étoile
+                    if (thief <= 40) {
+                        console.log("Vous ne volez rien!");
+                    }else if (thief <= 70) {
+                        console.log("Vous avez volé une potion!");
+                        inventory.push("position");
+                    }else if (thief <= 85) {
+                        console.log("Vous avez volé un fragment d'étoile!");
+                        inventory.push("fragment")
+                    }else if (thief <= 95) {
+                        console.log("Vous avez volé un éther!");
+                        inventory.push("ether")
+                    }else if (thief <= 100) {
+                        console.log("Vous avez volé une demi-étoile!");
+                        inventory.push("demi-etoile")
+                    }
+
+                    //Attaque spécial du dieu
+                }else if (adventurers[i].classAdventur === dieu) {
+                    console.log("Vous utilisez le rayon de la mort!")
+                    touchingattack = Math.floor((Math.random() * 100) + 1);
+                    if (touchingattack < protagonist.attackPotency) {
+                        console.log("L'attaque touche!");
+                        antagonist.HPCurrent = antagonist.HPCurrent - ((protagonist.physicalAttack - antagonist.physicalDefense)*5);                
+                    }
+                    else {
+                        console.log("Votre attaque échoue!");
+                    }
+                    console.log(`L'ennemi a désormais ${antagonist.HPCurrent}`);
+                    turn = "antagonistturn";
+                    i = 0;
+                }
+                
             } else if (fmenu === 2) {
                 console.log("Vous vous défendez!");
                 i = i + 1;
