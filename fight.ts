@@ -41,7 +41,7 @@ export async function _fight() {
                 j++;
                 antagonist = monsters[j];
             }
-            console.log(`${antagonist.name} est mort!`);
+            
             return;
         }
         if (protagonist.HPCurrent <= 0) {
@@ -93,9 +93,8 @@ export async function _fight() {
                         i = 0;
                     }
 
-                    //Attaque spécial
-                } else if (whichattack === 3) {
-
+                }
+                if (whichattack === "Attaque Spéciale") {
                     let guerrier: string | null= "guerrier";
                     let mage: string | null= "mage";
                     let paladin: string | null= "paladin";
@@ -215,7 +214,7 @@ export async function _fight() {
                     let index = inventory.indexOf("Potion");
                     inventory.splice(index, 1);
                 }
-                // ... handle other items
+                
             }
             if (fmenu === 4) {
                 console.log(inventory);
