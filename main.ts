@@ -11,6 +11,6 @@ import { processing } from "./process.ts"
 
 
 
-processing();
+processing();     // Fonction qui procède à l'histoire
 
 

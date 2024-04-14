@@ -4,22 +4,22 @@ import { adventurers } from "./chooseGroup.ts";
 import { monster } from "./persoMonster.ts";
 import { fightBoss } from "./history.ts";
 
-export function processing(){
+export function processing(){                         // Fonction déroule l'histoire du jeu
     let l = 1;
     let object = ["Potion", "Morceau d'étoile", "Demi étoile", "Ether"];
-    let inventory = ["Potion", "Potion", "Morceau d'étoile", "Demi étoile", "Ether"];
+    let inventory = ["Potion", "Potion", "Morceau d'étoile", "Demi étoile", "Ether"];               //Inventaire
     let map = "[ ]\n [ ]\n [ ]\n [ ]\n [ ]";
     console.log("Vous entrez dans le donjon...");
     console.log(`Vous êtes dans la salle ${l}.`);
     if (l === 1) {
-        map = "[ ]\n [ ]\n [ ]\n [ ]\n [*]";
+        map = "[ ]\n [ ]\n [ ]\n [ ]\n [*]";     //Système de map avec la map de la salle 1
     }
     let userchoicem1 = prompt("Voulez vous voir la carte?\n Oui\n Non");
     if (userchoicem1 === "Oui") {
         console.log(map);
     }
     console.log("Il y a des monstres dans cette salle, une porte, et entre les deux un coffre.");
-    let userChoicef1 = prompt("Voulez vous attaquer l'ennemi?`\n Oui\n Non");
+    let userChoicef1 = prompt("Voulez vous attaquer l'ennemi?`\n Oui\n Non");           //Choix d'attaque de l'ennemi
     if (userChoicef1 === "Oui") {
         _fight();
     } else if (userChoicef1 === "Non") {
@@ -29,11 +29,11 @@ export function processing(){
     }
     console.log(`Vous avez vaincu les ennemis de la salle ${l}!`)
     l = l + 1;
-    let userChoicec1 = prompt("Vous approchez du coffre?\n Oui\n Non");
+    let userChoicec1 = prompt("Vous approchez du coffre?\n Oui\n Non");        //Choix pour le coffre avec possible piège
     if (userChoicec1 === "Oui") {
         console.log("Vous vous approchez du coffre!");
         const trapProbability = Math.random();
-        if (trapProbability < 0.3) {
+        if (trapProbability < 0.3) {                        //Piège du coffre
             console.log("Le coffre était piégé. Vous êtes blessé!");
             adventurers[0].HPCurrent = adventurers[0].HPCurrent - 10;
         } else {
@@ -42,7 +42,7 @@ export function processing(){
         }
     
     } else if (userChoicec1 === "Non") {
-        console.log(`Vous passez à la salle ${l}!`);
+        console.log(`Vous passez à la salle ${l}!`);    //Fin de la salle et passage à la salle suivante
     }
     console.log(`Vous êtes dans la salle ${l}!`);
     if (l === 2) {

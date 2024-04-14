@@ -18,16 +18,21 @@ export class Character {
 
     /**
      * 
-     * @param name The name of the aventurier
-     * @param physicalAttack  The physical attack of the aventurier
-     * @param physicalDefense  The physical defense of the aventurier
-     * @param speed  The speed attack of the aventurier
-     * @param HPMax  The max HP of the aventurier
-     * @param HPCurrent  The current HP of the aventurier
-     * @param attackPotency  The potential for a successful attack
-     * @param canBeHurt 
-     * @param canBeCured 
-     * @param canBeResurrected 
+     * @param classAdventur La classe de l'aventurier
+     * @param name Le nom de l'aventurier
+     * @param physicalAttack L'attaque physique de l'aventurier
+     * @param physicalDefense La défense physique de l'aventurier
+     * @param magicalAttack L'attaque magique de l'aventurier
+     * @param magicalDefense La défense magique de l'aventurier
+     * @param mana Le mana de l'aventurier
+     * @param speed La vitesse de l'aventurier
+     * @param HPMax Les points de vie max de l'aventurier
+     * @param HPCurrent Les points de vie actuels de l'aventurier
+     * @param attackPotency Le pourcentage de chance de toucher le monstre
+     * @param canBeHurt L'aventurier peut être blessé
+     * @param canBeCured L'aventurier peut être soigné
+     * @param canBeResurrected L'aventurier peut être ressuscité
+     * @param isKO L'aventurier est KO
      */
     constructor(classAdventur: string, name: string, physicalAttack: number, physicalDefense: number, magicalAttack: number, magicalDefense: number, mana: number, speed: number, HPMax: number, HPCurrent: number, attackPotency: number, canBeHurt: boolean, canBeCured: boolean, canBeResurrected: boolean, isKO: boolean) {
 
@@ -62,13 +67,13 @@ export class Monster {
 
 /**
  * 
- * @param name The name of the monster
- * @param physicalAttack The physical attack of the monster
- * @param physicalDefense The physical defense of the monster
- * @param speed The speed attack of the monster
- * @param HPMax The max HP of the monster
- * @param HPCurrent The current HP of the monster
- * @param attackPotency The potential for a successful attack
+ * @param name Le nom du monstre
+ * @param physicalAttack L'attaque physique du monstre
+ * @param physicalDefense La défense physique du monstre
+ * @param speed La vitesse d'attaque du monstre
+ * @param HPMax Les points de vie max du monstre
+ * @param HPCurrent Les points de vie actuels du monstre
+ * @param attackPotency Le pourcentage de chance de toucher l'aventurier'
  */
     constructor(name: string, physicalAttack: number, physicalDefense: number, magicalDefense: number, speed: number, HPMax: number, HPCurrent: number, attackPotency: number) {
         this.name = name;
