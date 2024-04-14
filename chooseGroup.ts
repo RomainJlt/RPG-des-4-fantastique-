@@ -3,7 +3,7 @@ import { humain, Character, Monster } from "./persoMonster.ts";
 import { dungeon } from "./history.ts";
 
 export function chooseGroup(): Character[] {
-    console.log("Choisissez un groupe d'aventurier avec les classes suivantes:");
+    console.log("Choisissez un groupe d'aventurier avec les classes suivantes:");   // Choix des aventuriers
     for (let i = 0; i < humain.length; i++) {
         console.log(`${i + 1}. ${humain[i].name}`);
     }
@@ -23,7 +23,7 @@ export function chooseGroup(): Character[] {
         group.push(selectedCharacter);
     }
 
-    group.sort((a, b) => b.speed - a.speed); 
+    group.sort((a, b) => b.speed - a.speed);                //Tri du groupe par vitesse
 
     console.log("Voici le groupe trié en fonction de la vitesse:");
     for (let i = 0; i < group.length; i++) {
@@ -40,18 +40,18 @@ function shuffleArray(array: any[]) {
     }
 }
 
-export function enemyGroup(): Monster[] {
+export function enemyGroup(): Monster[] {           //Monstres randoms
     const chosenMonsters: Monster[] = [];
-    const possibleMonsters = [...dungeon.chooseRandomMonsters(3)]; // Create a copy of the monsters array
+    const possibleMonsters = [...dungeon.chooseRandomMonsters(3)]; 
 
     for (let i = 0; i < 3; i++) {
         const randomIndex = Math.floor(Math.random() * possibleMonsters.length);
         const chosenMonster = possibleMonsters[randomIndex];
         chosenMonsters.push(chosenMonster);
-        possibleMonsters.splice(randomIndex, 1); // Remove the chosen monster from the list of possible monsters
+        possibleMonsters.splice(randomIndex, 1); 
     }
 
-    // chosenMonsters.sort((c, d) => d.speed - c.speed);
+    
     chosenMonsters.sort((c, d) => c.name.localeCompare(d.name));
 
     console.log("Voici le groupe d'ennemis trié en fonction du nom:");
@@ -62,5 +62,5 @@ export function enemyGroup(): Monster[] {
     return chosenMonsters;
 }
 
-export const adventurers: Character[] = chooseGroup();
-export const monsters: Monster[] = enemyGroup();
+export const adventurers: Character[] = chooseGroup();     //export des personnages
+export const monsters: Monster[] = enemyGroup();        //export des monstres
