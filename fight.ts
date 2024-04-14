@@ -203,7 +203,7 @@ export async function _fight() {
                         if (antagonist.HPCurrent < 0) {
                             antagonist.HPCurrent = 0;
                         } 
-                    } else               
+                    } else {              
                         console.log("Votre attaque échoue!");
                     }
                     console.log(`L'ennemi a désormais ${antagonist.HPCurrent}`);
