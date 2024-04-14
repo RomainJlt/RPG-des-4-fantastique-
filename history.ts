@@ -15,6 +15,7 @@ export class Dungeon {
         this.boss = boss;
     }
 
+    // Méthode asynchrone pour explorer le donjon
     async explore(): Promise<void>{
         console.log("Vous entrez dans le donjon...");
         await this.exploreRoomWithCombat(3);
@@ -24,6 +25,7 @@ export class Dungeon {
         
     }
 
+    // Méthode privée asynchrone pour explorer une salle avec combat
     private async exploreRoomWithCombat(numberOfMonsters: number): Promise<void> {
         console.log("Vous entrez dans une salle...");
         console.warn("Des monstres apparaissent: Début du combat...");
@@ -34,6 +36,7 @@ export class Dungeon {
         await _fight();
     }
 
+        // Méthode publique pour choisir des monstres aléatoires
     public chooseRandomMonsters(numberOfMonsters: number): Monster[] {
         const chosenMonsters: Monster[] = [];
         for(let i = 0; i < numberOfMonsters; i++){
@@ -66,11 +69,13 @@ export class Dungeon {
 }
 
 
+// Fonction pour débuter le combat contre le boss
 export function fightBoss(): void {
     console.log("Vous entrez dans la salle du Boss...");
     console.warn(`Un ${dragon} apparaît!`);
     _fight();
 }
 
+// Création d'une instance de Dungeon avec des monstres random et un boss spécifique
 export const dungeon = new Dungeon(monster, dragon);
 //dungeon.explore();
